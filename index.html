@@ -18,10 +18,53 @@
             overflow: hidden; perspective: 1000px;
         }
 
-        /* --- 1. VIDEO DE FOND (ACCÉLÉRÉE) --- */
+        /* --- 0. ECRAN DE VEROUILLAGE --- */
+        #lock-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('Heartopia.jpg') no-repeat center center fixed;
+            background-size: cover;
+            z-index: 20000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 1s ease, visibility 1s;
+            cursor: pointer;
+        }
+        #lock-screen::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(3px); z-index: -1;
+        }
+
+        .lock-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px #ffd700);
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .unlock-text {
+            font-family: 'Cinzel Decorative', serif;
+            color: #fff; font-size: 1.5rem; letter-spacing: 3px;
+            text-transform: uppercase; text-align: center;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            animation: glowText 2s infinite alternate;
+            padding: 0 20px;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @keyframes glowText {
+            from { text-shadow: 0 0 10px #fff, 0 0 20px #d4af37; }
+            to { text-shadow: 0 0 20px #fff, 0 0 40px #d4af37; }
+        }
+
+        .unlocked { opacity: 0; visibility: hidden; pointer-events: none; }
+
+
+        /* --- 1. VIDEO DE FOND --- */
         #video-wrapper {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
-            /* Transition réduite à 1.5s au lieu de 3s */
             transition: transform 1.5s cubic-bezier(0.55, 0.055, 0.675, 0.19);
             transform-origin: center center;
         }
@@ -35,7 +78,7 @@
         .p2 { left: 90%; top: 100%; animation-duration: 15s; animation-delay: -5s; }
         @keyframes float { to { transform: translateY(-120vh); } }
 
-        /* --- 3. VIDEO PERSONNAGES (40%) --- */
+        /* --- 3. VIDEO PERSONNAGES --- */
         #char-wrapper {
             position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
             width: 100%; height: 40%; z-index: 8; pointer-events: none;
@@ -52,13 +95,11 @@
             pointer-events: none; transition: opacity 0.5s ease;
         }
 
-        /* --- ÉCRAN DE TRANSITION (ACCÉLÉRÉ) --- */
         #transition-screen {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: url('Heartopia.jpg') no-repeat center center fixed;
             background-size: cover;
             z-index: 100; opacity: 0; pointer-events: none;
-            /* Apparition plus rapide : 0.8s au lieu de 1.5s */
             transition: opacity 0.8s ease-in; 
         }
         body.animating #transition-screen { opacity: 1; }
@@ -109,7 +150,6 @@
 
         body.animating #ui-layer, body.animating #main-header { opacity: 0; pointer-events: none; }
 
-        /* OPTIMISATION MOBILE */
         @media only screen and (max-width: 768px) {
             #ui-layer { 
                 grid-template-columns: repeat(2, 1fr);
@@ -118,10 +158,17 @@
             .hero-title { font-size: 2.2rem; letter-spacing: 4px; }
             .welcome-subtitle { font-size: 0.9rem; }
             #char-wrapper { height: 35%; }
+            .lock-icon { font-size: 60px; }
+            .unlock-text { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
+
+    <div id="lock-screen">
+        <div class="lock-icon">🔒</div>
+        <div class="unlock-text" id="unlockText">CLIQUEZ POUR DÉVERROUILLER LE MONDE</div>
+    </div>
 
     <div id="container">
         <div id="video-wrapper">
@@ -137,7 +184,6 @@
         </div>
 
         <div class="vignette-overlay"></div>
-        
         <div id="transition-screen"></div>
 
         <header id="main-header">
@@ -151,11 +197,9 @@
             <a href="indexen.html" class="lang-card">English</a>
             <a href="indexfr.html" class="lang-card">Français</a>
             <a href="indexes.html" class="lang-card">Español</a>
-            
             <a href="indexde.html" class="lang-card">Deutsch</a>
             <a href="indexit.html" class="lang-card">Italiano</a>
             <a href="indexpo.html" class="lang-card">Português</a>
-
             <a href="indexch.html" class="lang-card">中文 (Chinese)</a>
             <a href="indexin.html" class="lang-card">Bahasa Indonesia</a>
             <a href="indexthai.html" class="lang-card">ไทย (Thai)</a>
@@ -167,6 +211,34 @@
     <audio id="bg-music" src="musique.mp3" loop preload="auto"></audio>
 
     <script>
+        // --- 1. DETECTION DE LANGUE ET TRADUCTION ---
+        const translations = {
+            'fr': "Cliquez pour déverrouiller le monde",
+            'en': "Click to unlock the world",
+            'es': "Haz clic para desbloquear el mundo",
+            'de': "Klicken, um die Welt freizuschalten",
+            'it': "Clicca per sbloccare il mondo",
+            'pt': "Clique para desbloquear o mundo",
+            'zh': "点击解锁世界", // Chinois
+            'id': "Klik untuk membuka dunia",
+            'th': "คลิกเพื่อปลดล็อกโลก"
+        };
+
+        // Détecter la langue du navigateur (ex: "fr-FR" -> "fr")
+        const userLang = navigator.language || navigator.userLanguage; 
+        const langCode = userLang.substring(0, 2); // Prendre les 2 premières lettres
+
+        // Appliquer la traduction si elle existe, sinon garder le Français par défaut
+        const textElement = document.getElementById('unlockText');
+        if (translations[langCode]) {
+            textElement.innerText = translations[langCode];
+        } else {
+            // Fallback anglais si langue inconnue (plus universel que le français)
+            textElement.innerText = translations['en'];
+        }
+
+        // --- 2. FONCTIONNEMENT DU SITE ---
+        const lockScreen = document.getElementById('lock-screen');
         const wrapper = document.getElementById('video-wrapper');
         const bgVideo = document.getElementById('bgVideo');
         const cards = document.querySelectorAll('.lang-card');
@@ -182,17 +254,16 @@
         clickSound.volume = 0.8;
         bgMusic.volume = 0.5;
 
-        // Musique au premier clic/mouvement
-        let musicStarted = false;
-        function startAtmosphere() {
-            if (!musicStarted) {
-                bgMusic.play().then(() => { musicStarted = true; }).catch(e => {});
-            }
-        }
-        document.addEventListener('mousedown', startAtmosphere);
-        document.addEventListener('touchstart', startAtmosphere);
+        // GESTION DU DÉVERROUILLAGE
+        lockScreen.addEventListener('click', () => {
+            bgMusic.play().catch(e => console.log("Audio bloqué ?", e));
+            clickSound.play().catch(() => {});
+            lockScreen.classList.add('unlocked');
+            bgVideo.play().catch(() => {});
+            document.querySelector('#char-wrapper video').play().catch(() => {});
+        });
 
-        // Auto-entrée à la fin de la vidéo (vers FR par défaut)
+        // Auto-entrée à la fin de la vidéo
         bgVideo.addEventListener('ended', () => triggerTransition('indexfr.html'));
 
         function triggerTransition(destination) {
@@ -200,20 +271,18 @@
             body.classList.add('animating');
             wrapper.classList.add('zoomed');   
 
-            // Fondu sonore de sortie PLUS RAPIDE
             let fadeAudio = setInterval(() => {
-                if (bgMusic.volume > 0.1) bgMusic.volume -= 0.1; // Baisse plus vite
+                if (bgMusic.volume > 0.1) bgMusic.volume -= 0.1; 
                 else {
                     clearInterval(fadeAudio);
                     bgMusic.pause();
                 }
             }, 100);
 
-            // Délai réduit à 1400ms (1.4 secondes) au lieu de 2800ms
             setTimeout(() => { window.location.href = destination; }, 1400);
         }
 
-        // Parallaxe (PC seulement)
+        // Parallaxe
         if (window.innerWidth > 768) {
             document.addEventListener('mousemove', (e) => {
                 if(body.classList.contains('animating')) return;
