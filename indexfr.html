@@ -2,158 +2,220 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Maptopia FR - Heartopia System</title>
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Maptopia - Heartopia FR</title>
     
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link rel="stylesheet" href="style.css">
-    
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        /* Styles spécifiques pour l'interface REX */
+        #rex-chat-container {
+            z-index: 99999 !important; /* Au-dessus de tout */
+        }
+        /* Animation d'apparition fluide */
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        /* Effet de survol sur le logo Discord */
+        .social-logo-anim:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
 
-    <div id="quiz-container">
-        <div style="font-size: 40px; margin-bottom: 10px;">🎓</div>
-        <h2 id="quiz-question" style="color: #8b0000; font-size: 20px; margin-top: 0;"></h2>
-        <div id="quiz-options"></div>
-        <p id="quiz-feedback" style="margin-top: 15px; font-weight: 900; font-size: 18px;"></p>
-        <button onclick="closeQuiz()" style="margin-top: 15px; background: #8b0000; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: bold;">QUITTER LE QUIZ</button>
-    </div>
-
-    <audio id="main-audio"><source src="sonheartopia.mp4" type="audio/mp4"></audio>
-
-    <button id="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
-    <button id="mobile-legend-toggle" onclick="toggleMobileLegend()">📌</button>
-
     <div id="intro-screen">
-        <a href="https://heartopia.xd.com/en" target="_blank" class="official-link-text" title="Site Officiel de Heartopia">
-            LIEN OFFICIEL HEARTOPIA
-        </a>
-
-        <h1 class="heartopia-title">MAPTOPIA FR</h1>
-        <div class="welcome-box">
-            <p>Explorez la carte interactive officielle de la communauté Heartopia.</p>
-            <div class="btn-container">
-                <button id="enter-button" class="btn-magic" onclick="startExperience()">✨ ENTRER SUR LA CARTE ✨</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="welcome-modal">
-        <div class="welcome-content">
-            <div class="welcome-header">CHERS HEARTOPIENS</div>
-            <div class="welcome-text">
-                Bienvenue sur <b>Maptopia</b>, votre compagnon de route pour explorer Heartopia !<br>
-             
-                <div class="details-list">
-                    • <b>Navigation :</b> Menu compact à gauche pour filtrer.<br>
-                    <span class="pc-only">• <b>Marqueurs :</b> <b>Clic Droit</b> pour placer vos points.<br></span>
-                    • <b>Collection :</b> Cochez les cases dans les menus "Poissons", "Insectes" et "Oiseaux" pour suivre votre progression.<br>
-                    • <b>Ressources :</b> NOUVEAU ! Les zones de collecte (Bois, Minerais, Fruits) sont affichées sur la carte.<br>
-                    • <b>Contact :</b> Utilisez la bulle 💬 en bas à droite pour envoyer un message privé à l'équipe.<br>
-                    • <b>Email :</b> Vous pouvez aussi nous écrire à <b>maptopiafr@gmail.com</b>.<br>
-                    • <b>Sauvegarde :</b> Vos données sont sauvegardées ici.
-                </div>
-
-                <div class="welcome-note">
-                    🐾 <b>NOTE SUR LE MOUVEMENT :</b><br>
-                    Les mouvements des animaux sont fictifs mais basés sur leurs zones réelles.
-                    Albert Jr. parcourt le village pour vous guider.
-                </div>
-                🛠️ <b>ÉTAT DU PROJET :</b><br>
-                Ce site est actuellement en développement.
-            </div>
-            <button class="btn-rex" onclick="closeWelcome()">C'EST PARTI !</button>
-        </div>
-    </div>
-
-    <div id="social-container">
-        <div id="contact-trigger" onclick="toggleChat()">💬</div>
-        <a href="https://discord.gg/M4BkXRhhUw" target="_blank" title="Rejoindre le Discord" id="discord-link-wrapper">
-            <img src="Discord-Logo-PNG-Pic.png" id="discord-img" class="social-btn-img" alt="Discord">
-        </a>
-    </div>
-
-    <div id="simple-chat-box">
-        <div class="chat-header">
-            <span>CONTACTER L'ÉQUIPE</span>
-            <button class="close-chat" onclick="toggleChat()">X</button>
-        </div>
-        <div class="chat-form">
-            <label class="chat-label">VOTRE NOM DISCORD (Pour réponse)</label>
-            <input type="text" id="user-name" class="chat-input" placeholder="Ex: Rex#1234">
-
-            <label class="chat-label">VOTRE MESSAGE</label>
-            <textarea id="user-msg" class="chat-textarea" placeholder="Une idée ? Une erreur ? Dites-nous tout..."></textarea>
-
-            <button class="chat-submit" onclick="sendToDiscord()">ENVOYER</button>
-            <div id="chat-status"></div>
-
-            <div class="chat-footer-mail">
-                Ou par email : <a href="mailto:maptopiafr@gmail.com?subject=Contact%20Maptopia">maptopiafr@gmail.com</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="ping-legend" id="legend-box">
-        <div class="language-selector legend-langs" style="margin-bottom: 10px; display: flex; gap: 8px; justify-content: center;">
-            <a href="index.html" class="btn-lang-switch">🌍 CHANGER DE LANGUE</a>
-        </div>
-
-        <div style="text-align:center; font-weight:bold; border-bottom:1px solid #d4af37; padding-bottom:5px; font-size:12px;"></div>
+        <h1 class="heartopia-title">HEARTOPIA</h1>
+        <a href="https://discord.gg/heartopia" target="_blank" class="official-link-text">Rejoindre le Discord Officiel</a>
         
-        <div style="text-align:center; font-weight:bold; border-bottom:1px solid #d4af37; padding-bottom:5px; font-size:12px;">📌 MES MARQUEURS</div>
-        <div id="legend-list"></div>
-        <div class="legend-guide">
-            <div class="guide-row pc-only"><span class="guide-icon">🖥️</span><span><b>PC :</b> Clic Droit = Point</span></div>
-            <div class="guide-row"><span class="guide-icon">📱</span><span><b>Mobile :</b> Menu haut gauche</span></div>
-        </div>
-
-        <div class="rating-container">
-            <div class="like-section">
-                <button id="like-btn-internal" class="like-btn-internal" onclick="toggleLikeInternal()">
-                    <span class="heart-icon-anim">❤</span> J'AIME LA CARTE
-                </button>
-                <span id="like-count-internal">Chargement...</span>
-            </div>
-            <p style="font-size:9px; color:#777; margin-top:5px;">(Cliquez pour soutenir !)</p>
-        </div>
-        <div class="quiz-section">
-            <p style="font-size:10px; color:#aaa; margin-bottom:5px; text-align:center;">TESTEZ VOS CONNAISSANCES</p>
-            <div style="display: flex; justify-content: center;">
-                <div id="quiz-trigger" onclick="openQuiz()">🎓</div>
+        <div class="welcome-box">
+            <h2>Bienvenue sur Maptopia FR</h2>
+            <p>La carte interactive non-officielle pour explorer le monde d'Heartopia.</p>
+            
+            <div class="btn-container">
+                <button class="btn-magic" onclick="startExperience()">✨ ENTRER SUR LA CARTE ✨</button>
             </div>
         </div>
     </div>
 
     <div id="map"></div>
 
-    <div id="overlay-info" onclick="this.style.display='none'" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10000; justify-content:center; align-items:center;">
-        <div class="info-card" onclick="event.stopPropagation()" style="background:white; padding:5px; border-radius:50px; width:95%; max-width:530px; text-align:center; max-height: 90vh; overflow-y: auto;">
-            <h2 id="info-name" style="color:#8b0000; margin-top:0; text-transform:uppercase; border-bottom: 2px solid #d4af37; padding-bottom: 5px;"></h2>
+    <audio id="main-audio" loop>
+        <source src="ambiance.mp3" type="audio/mpeg">
+    </audio>
 
-            <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: center;">
-                <div style="flex: 1;">
-                    <p style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">MÉTÉO</p>
-                    <img id="info-weather" src="" style="width:100%; border-radius:8px; border: 1px solid #eee;">
-                </div>
-                <div style="flex: 1;">
-                    <p style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">HORAIRES</p>
-                    <img id="info-time" src="" style="width:100%; border-radius:8px; border: 1px solid #eee;">
-                </div>
+    <div id="welcome-modal">
+        <div class="welcome-content">
+            <div class="welcome-header">Bienvenue Explorateur !</div>
+            <div class="welcome-text">
+                <p>Cette carte recense les ressources, les poissons, les insectes et bien plus encore.</p>
+                <div class="welcome-note">💡 Astuce : Utilisez le menu à gauche pour filtrer les éléments.</div>
+                <ul class="details-list">
+                    <li>📍 <b>Double-cliquez</b> sur la carte pour ajouter vos propres marqueurs.</li>
+                    <li>🔍 <b>Zoomez</b> pour voir les détails précis.</li>
+                    <li>🤖 <b>Nouveau :</b> Posez vos questions à REX en bas à droite !</li>
+                </ul>
             </div>
-
-            <div style="width: 100%; margin-top: 10px;">
-                <p style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">ZONE DE CAPTURE</p>
-                <img id="info-loc" src="" style="width:100%; max-width: 550px; border-radius:12px; border: 2px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            </div>
-
-            <button onclick="document.getElementById('overlay-info').style.display='none'" style="margin-top:20px; padding:12px 30px; cursor:pointer; background:#8b0000; color:white; border:none; border-radius:50px; font-weight:bold; text-transform:uppercase;">FERMER</button>
+            <button class="btn-rex" onclick="closeWelcome()">C'est parti !</button>
         </div>
     </div>
 
+    <div id="legend-box" class="ping-legend pc-only">
+        <div class="legend-langs">
+            <a href="indexen.html" class="btn-lang-switch">🇬🇧 Switch to English</a>
+            <a href="indexes.html" class="btn-lang-switch" style="margin-top:5px;">🇪🇸 Cambiar a Español</a>
+        </div>
+
+        <div style="text-align:center; font-weight:bold; margin-bottom:5px; color:#d4af37;">VOS MARQUEURS</div>
+        <div id="legend-list"></div>
+        
+        <div class="rating-container">
+            <div class="like-section">
+                <button id="like-btn-internal" class="like-btn-internal" onclick="toggleLikeInternal()">
+                    <span class="heart-icon-anim">❤</span> J'aime la carte
+                </button>
+            </div>
+            <div style="margin-top:5px; font-size:10px; color:#aaa;">
+                Déjà <span id="like-count-internal">...</span> J'aime
+            </div>
+        </div>
+
+        <div class="quiz-section">
+            <div style="font-size:11px; color:#ccc; margin-bottom:5px;">Testez vos connaissances !</div>
+            <div id="quiz-trigger" onclick="openQuiz()">🎓</div>
+        </div>
+    </div>
+
+    <div id="overlay-info" onclick="this.style.display='none'">
+        <div class="info-card" onclick="event.stopPropagation()">
+            <h2 id="info-name" style="color:#8b0000; margin-top:0;">Nom</h2>
+            <div style="display:flex; justify-content:space-around; margin-top:15px;">
+                <div><img id="info-loc" src="" style="width:50px; height:50px; object-fit:contain;"><br><small>Lieu</small></div>
+                <div><img id="info-weather" src="" style="width:50px; height:50px; object-fit:contain;"><br><small>Météo</small></div>
+                <div><img id="info-time" src="" style="width:50px; height:50px; object-fit:contain;"><br><small>Heure</small></div>
+            </div>
+            <button onclick="document.getElementById('overlay-info').style.display='none'" style="margin-top:20px; padding:10px 20px; background:#333; color:white; border:none; border-radius:5px; cursor:pointer;">Fermer</button>
+        </div>
+    </div>
+
+    <div id="quiz-container">
+        <h2 id="quiz-question" style="color:#8b0000; font-size:18px;">Question...</h2>
+        <div id="quiz-options"></div>
+        <p id="quiz-feedback" style="font-weight:bold; height:20px;"></p>
+        <button onclick="closeQuiz()" style="background:#555; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; margin-top:10px;">Quitter</button>
+    </div>
+
+    <div id="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</div>
+    <div id="mobile-legend-toggle" onclick="toggleMobileLegend()">★</div>
+
+
+    <div id="social-container" style="
+        position: fixed; 
+        bottom: 20px; 
+        right: 20px; 
+        z-index: 99999; 
+        display: flex; 
+        align-items: center; 
+        gap: 15px;"> <button onclick="toggleRex()" style="
+            padding: 10px 15px; 
+            background: #8b0000; 
+            color: white; 
+            border: 2px solid #d4af37; 
+            border-radius: 25px; 
+            font-weight: bold; 
+            font-size: 14px;
+            cursor: pointer; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+            transition: transform 0.2s;
+            white-space: nowrap;">
+            🤖 REX
+        </button>
+
+        <a href="https://discord.gg/heartopia" target="_blank" style="display: flex;">
+            <img src="Discord-Logo-PNG-Pic.png" alt="Discord" class="social-logo-anim" style="
+                width: 55px; 
+                height: 55px; 
+                object-fit: contain; 
+                filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); 
+                transition: transform 0.3s;">
+        </a>
+
+        <div onclick="toggleChat()" style="
+            width: 60px; 
+            height: 60px; 
+            background: #8b0000; 
+            border: 2px solid #d4af37; 
+            border-radius: 50%;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 28px; 
+            color: white;
+            cursor: pointer; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5); 
+            transition: transform 0.3s;"
+            onmouseover="this.style.transform='scale(1.1)'" 
+            onmouseout="this.style.transform='scale(1)'">
+            💬
+        </div>
+    </div>
+
+    <div id="simple-chat-box">
+        <div class="chat-header">
+            <span>Contact Support</span>
+            <button class="close-chat" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-form">
+            <label class="chat-label">Votre Pseudo :</label>
+            <input type="text" id="user-name" class="chat-input" placeholder="Ex: Voyageur42">
+            
+            <label class="chat-label">Votre Message / Bug :</label>
+            <textarea id="user-msg" class="chat-textarea" placeholder="Décrivez votre problème..."></textarea>
+            
+            <button class="chat-submit" onclick="sendToDiscord()">Envoyer à l'équipe</button>
+            <div id="chat-status"></div>
+            
+            <div class="chat-footer-mail">
+                Ou par mail : <a href="mailto:maptopiafr@gmail.com">maptopiafr@gmail.com</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="rex-chat-container" style="
+        position: fixed; 
+        bottom: 90px; 
+        right: 170px; /* Ajusté pour être au-dessus du bouton REX à gauche */
+        width: 300px; 
+        height: 350px;
+        background: white; 
+        border: 3px solid #d4af37; 
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+        display: none; 
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+        animation: popIn 0.3s ease-out;">
+        
+        <div style="background: #8b0000; color: white; padding: 10px; text-align: center; font-weight: bold; border-bottom: 2px solid #d4af37;">
+            🤖 REX - Assistant
+            <button onclick="toggleRex()" style="float: right; background: none; border: none; color: white; cursor: pointer; font-weight: bold;">X</button>
+        </div>
+        
+        <div id="rex-messages" style="height: 250px; overflow-y: auto; padding: 10px; background: #fafafa; display: flex; flex-direction: column;"></div>
+        
+        <div style="position: absolute; bottom: 0; width: 100%; padding: 10px; background: #fff; border-top: 1px solid #ddd; box-sizing: border-box; display: flex;">
+            <input type="text" id="rex-user-input" placeholder="Pose ta question..." style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 20px; outline: none;">
+            <button onclick="askRex()" style="margin-left: 5px; background: #8b0000; color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-weight: bold;">➤</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
     <script src="data-fr.js"></script>
+
+    <script src="heartopia_data.js"></script> <script src="rex.js"></script>
 
     <script src="app.js"></script>
 
