@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heartopia - Accueil</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8b0000">
+    
+    <link rel="icon" type="image/jpeg" href="maptopia.jpg">
+    <link rel="apple-touch-icon" href="maptopia.jpg">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Maptopia">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Raleway:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- BASES --- */
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Raleway', sans-serif; }
+        
+        #container {
+            position: relative; width: 100vw; height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            overflow: hidden; perspective: 1000px;
+        }
+
+        /* --- 0. ECRAN DE VEROUILLAGE --- */
+        #lock-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('Heartopia.jpg') no-repeat center center fixed;
+            background-size: cover;
+            z-index: 20000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 1s ease, visibility 1s;
+            cursor: pointer;
+        }
+        #lock-screen::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(3px); z-index: -1;
+        }
+
+        .lock-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px #ffd700);
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .unlock-text {
+            font-family: 'Cinzel Decorative', serif;
+            color: #fff; font-size: 1.5rem; letter-spacing: 3px;
+            text-transform: uppercase; text-align: center;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            animation: glowText 2s infinite alternate;
+            padding: 0 20px;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @keyframes glowText {
+            from { text-shadow: 0 0 10px #fff, 0 0 20px #d4af37; }
+            to { text-shadow: 0 0 20px #fff, 0 0 40px #d4af37; }
+        }
+
+        .unlocked { opacity: 0; visibility: hidden; pointer-events: none; }
+
+
+        /* --- 1. VIDEO DE FOND --- */
+        #video-wrapper {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+            transition: transform 1.5s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+            transform-origin: center center;
+        }
+        #video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+        #video-wrapper.zoomed { transform: scale(20) rotate(180deg); }
+
+        /* --- 2. PARTICULES --- */
+        .particles-container { position: absolute; width: 100%; height: 100%; z-index: 6; pointer-events: none; }
+        .particle { position: absolute; background: rgba(255,255,255,0.6); border-radius: 50%; width: 4px; height: 4px; animation: float 10s infinite linear; }
+        .p1 { left: 10%; top: 100%; animation-duration: 12s; } 
+        .p2 { left: 90%; top: 100%; animation-duration: 15s; animation-delay: -5s; }
+        @keyframes float { to { transform: translateY(-120vh); } }
+
+        /* --- 3. VIDEO PERSONNAGES --- */
+        #char-wrapper {
+            position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; height: 40%; z-index: 8; pointer-events: none;
+            transition: opacity 0.3s ease; mix-blend-mode: screen; 
+            display: flex; justify-content: center; align-items: flex-end;
+        }
+        #char-wrapper video { width: auto; height: 100%; max-width: 100%; object-fit: contain; }
+        body.animating #char-wrapper { opacity: 0; }
+
+        /* --- 4. FX & UI --- */
+        .vignette-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 9;
+            background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.8) 100%);
+            pointer-events: none; transition: opacity 0.5s ease;
+        }
+
+        /* --- ÉCRAN DE TRANSITION --- */
+        #transition-screen {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('Heartopia.jpg') no-repeat center center fixed;
+            background-size: cover;
+            z-index: 100; opacity: 0; pointer-events: none;
+            transition: opacity 0.8s ease-in; 
+        }
+        body.animating #transition-screen { opacity: 1; }
+
+        #main-header {
+            position: relative; z-index: 20; text-align: center; color: white; margin-bottom: 20px;
+            transition: opacity 0.3s ease, transform 0.1s ease-out; padding: 0 20px;
+        }
+
+        .hero-title {
+            font-family: 'Cinzel Decorative', serif; font-size: 5rem; margin: 0; letter-spacing: 10px; text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            animation: shine 4s ease-in-out infinite alternate;
+        }
+        @keyframes shine {
+            0%, 100% { text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 215, 0, 0.3); }
+            50% { text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 60px rgba(255, 215, 0, 0.8); color: #fffced; }
+        }
+
+        .welcome-subtitle { font-size: 1.2rem; margin-top: 15px; letter-spacing: 2px; }
+        .gold-text { color: #ffd700; font-weight: bold; }
+
+        /* --- SELECTION DE LANGUE --- */
+        #ui-layer {
+            position: relative; z-index: 30;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 Colonnes pour PC */
+            gap: 8px;
+            width: 100%;
+            max-width: 850px;
+            transition: opacity 0.3s ease, transform 0.1s ease-out;
+            padding: 10px;
+        }
+
+        .lang-card {
+            text-decoration: none; color: white; 
+            font-size: 12px;
+            font-weight: bold; text-transform: uppercase; 
+            letter-spacing: 1px; 
+            padding: 10px 5px;
+            text-align: center; 
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px;
+            transition: all 0.3s ease; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 40px;
+        }
+
+        .lang-card:hover { 
+            background: rgba(255, 255, 255, 0.15); border-color: #ffd700; 
+            transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
+        }
+
+        /* Classe spéciale pour centrer l'Indonésien (PC uniquement) */
+        .span-2 { grid-column: span 2; }
+
+        body.animating #ui-layer, body.animating #main-header { opacity: 0; pointer-events: none; }
+
+        @media only screen and (max-width: 768px) {
+            #ui-layer { 
+                grid-template-columns: repeat(2, 1fr); /* 2 Colonnes sur Mobile */
+                width: 95%; gap: 6px; 
+                max-height: 55vh; overflow-y: auto; 
+            }
+            /* Sur mobile, on annule l'effet "span 2" pour garder l'ordre normal */
+            .span-2 { grid-column: auto; }
+            
+            .hero-title { font-size: 2.2rem; letter-spacing: 4px; }
+            .welcome-subtitle { font-size: 0.9rem; }
+            #char-wrapper { height: 35%; }
+            .lock-icon { font-size: 60px; }
+            .unlock-text { font-size: 1rem; }
+            .lang-card { padding: 12px 5px; font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="lock-screen">
+        <div class="lock-icon">🔒</div>
+        <div class="unlock-text" id="unlockText">CLIQUEZ POUR DÉVERROUILLER LE MONDE</div>
+    </div>
+
+    <div id="container">
+        <div id="video-wrapper">
+            <video id="bgVideo" src="op.mp4" autoplay muted playsinline></video>
+        </div>
+        
+        <div class="particles-container">
+            <div class="particle p1"></div><div class="particle p2"></div>
+        </div>
+
+        <div id="char-wrapper">
+            <video src="fondvert.mp4" autoplay loop muted playsinline></video>
+        </div>
+
+        <div class="vignette-overlay"></div>
+        <div id="transition-screen"></div>
+
+        <header id="main-header">
+            <h1 class="hero-title">HEARTOPIA</h1>
+            <p class="welcome-subtitle">
+                Ne regardez pas seulement la carte. Vivez le <span class="gold-text">voyage</span>.
+            </p>
+        </header>
+
+        <div id="ui-layer">
+            <a href="indexen.html" class="lang-card">English</a>
+            <a href="indexfr.html" class="lang-card">Français</a>
+            <a href="indexes.html" class="lang-card">Español</a>
+            <a href="indexde.html" class="lang-card">Deutsch</a>
+            
+            <a href="indexit.html" class="lang-card">Italiano</a>
+            <a href="indexpo.html" class="lang-card">Português</a>
+            <a href="indexch.html" class="lang-card">中文 (Chinese)</a>
+            <a href="indexja.html" class="lang-card">日本語 (Japanese)</a>
+            
+            <a href="indexko.html" class="lang-card">한국어 (Korean)</a>
+            <a href="indexin.html" class="lang-card span-2">Bahasa Indonesia</a>
+            <a href="indexthai.html" class="lang-card">ไทย (Thai)</a>
+        </div>
+    </div>
+
+    <audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
+    <audio id="click-sound" src="click.mp3" preload="auto"></audio>
+    <audio id="bg-music" src="musique.mp3" loop preload="auto"></audio>
+
+    <script>
+        // --- 1. DETECTION DE LANGUE ET TRADUCTION ---
+        const translations = {
+            'fr': "Cliquez pour déverrouiller le monde",
+            'en': "Click to unlock the world",
+            'es': "Haz clic para desbloquear el mundo",
+            'de': "Klicken, um die Welt freizuschalten",
+            'it': "Clicca per sbloccare il mondo",
+            'pt': "Clique para desbloquear o mundo",
+            'zh': "点击解锁世界", 
+            'id': "Klik untuk membuka dunia",
+            'th': "คลิกเพื่อปลดล็อกโลก",
+            'ja': "クリックして世界のロックを解除",
+            'ko': "세계를 잠금 해제하려면 클릭하세요"
+        };
+
+        const userLang = navigator.language || navigator.userLanguage; 
+        const langCode = userLang.substring(0, 2);
+
+        const textElement = document.getElementById('unlockText');
+        if (translations[langCode]) {
+            textElement.innerText = translations[langCode];
+        } else {
+            textElement.innerText = translations['en'];
+        }
+
+        // --- 2. FONCTIONNEMENT DU SITE ---
+        const lockScreen = document.getElementById('lock-screen');
+        const wrapper = document.getElementById('video-wrapper');
+        const bgVideo = document.getElementById('bgVideo');
+        const cards = document.querySelectorAll('.lang-card');
+        const body = document.body;
+        const header = document.getElementById('main-header');
+        const uiLayer = document.getElementById('ui-layer');
+        
+        const hoverSound = document.getElementById('hover-sound');
+        const clickSound = document.getElementById('click-sound');
+        const bgMusic = document.getElementById('bg-music');
+
+        hoverSound.volume = 0.3;
+        clickSound.volume = 0.8;
+        bgMusic.volume = 0.5;
+
+        // GESTION DU DÉVERROUILLAGE
+        lockScreen.addEventListener('click', () => {
+            bgMusic.play().catch(e => console.log("Audio bloqué ?", e));
+            clickSound.play().catch(() => {});
+            lockScreen.classList.add('unlocked');
+            bgVideo.play().catch(() => {});
+            document.querySelector('#char-wrapper video').play().catch(() => {});
+        });
+
+        // Auto-entrée à la fin de la vidéo
+        bgVideo.addEventListener('ended', () => triggerTransition('indexfr.html'));
+
+        function triggerTransition(destination) {
+            clickSound.play().catch(() => {});
+            body.classList.add('animating');
+            wrapper.classList.add('zoomed');   
+
+            let fadeAudio = setInterval(() => {
+                if (bgMusic.volume > 0.1) bgMusic.volume -= 0.1; 
+                else {
+                    clearInterval(fadeAudio);
+                    bgMusic.pause();
+                }
+            }, 100);
+
+            setTimeout(() => { window.location.href = destination; }, 1400);
+        }
+
+        // Parallaxe
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                if(body.classList.contains('animating')) return;
+                let x = (window.innerWidth / 2 - e.clientX) / 50;
+                let y = (window.innerHeight / 2 - e.clientY) / 50;
+                header.style.transform = `translate(${x * 0.5}px, ${y * 0.5}px)`;
+                uiLayer.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        }
+
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+               hoverSound.currentTime = 0; 
+               hoverSound.play().catch(() => {}); 
+            });
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                triggerTransition(this.getAttribute('href'));
+            });
+        });
+    </script>
+</body>
+</html>

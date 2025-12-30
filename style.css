@@ -1,0 +1,315 @@
+/* --- 1. RESET & BASE --- */
+* { box-sizing: border-box; }
+
+body, html { 
+    margin: 0; padding: 0; 
+    width: 100%; height: 100%; 
+    overflow: hidden; 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    background-color: #000;
+}
+
+/* La carte prend tout l'écran */
+#map { 
+    height: 100vh; width: 100vw; 
+    background: #1a1a1a; 
+    opacity: 0; 
+    transition: opacity 1s ease; 
+}
+
+/* --- 2. ECRAN D'ACCUEIL (INTRO) --- */
+#intro-screen {
+    position: fixed; top: 0; left: 0; 
+    width: 100vw; height: 100vh; 
+    background: url('Heartopia.jpg') no-repeat center center; 
+    background-size: cover; 
+    z-index: 20000; 
+    display: flex; flex-direction: column; 
+    align-items: center; justify-content: center; 
+    transition: opacity 0.8s ease;
+}
+#intro-screen::before {
+    content: ""; position: absolute; top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    background: rgba(0, 0, 0, 0.75); 
+    backdrop-filter: blur(5px); 
+    z-index: -1; 
+}
+
+.official-link-text { 
+    position: relative; z-index: 20002; margin-bottom: 20px; 
+    font-size: 18px; color: #fff; text-decoration: none; font-weight: 900; 
+    background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(50,50,50,0.8)); 
+    padding: 12px 25px; border: 2px solid #d4af37; border-radius: 50px;
+    transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); text-align: center;
+}
+.official-link-text:hover { 
+    background: #d4af37; color: #3e2723;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6); transform: scale(1.05);
+}
+
+.heartopia-title { 
+    position: relative; font-size: clamp(40px, 8vw, 80px); text-align: center; font-weight: 900;
+    margin-bottom: 20px; text-transform: uppercase; letter-spacing: 4px; 
+    background: linear-gradient(to bottom, #fff 20%, #d4af37 50%, #8b6b15 100%); 
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.8)); 
+    font-family: 'Arial Black', sans-serif; z-index: 20001; margin-top: 0;
+}
+
+.welcome-box { 
+    position: relative; width: 100%; max-width: 600px; padding: 40px 30px;
+    background: rgba(0, 0, 0, 0.85); border: 2px solid #d4af37; border-radius: 25px; 
+    color: white; text-align: center; box-shadow: 0 0 40px rgba(0,0,0,0.7);
+    z-index: 10; 
+}
+.welcome-box p { font-size: 18px; margin-bottom: 30px; }
+
+.btn-container { display: flex; flex-direction: column; gap: 15px; align-items: center; width: 100%; }
+
+.btn-magic {
+    width: 100%; max-width: 100%; white-space: normal; padding: 15px 10px;
+    background: linear-gradient(45deg, #8b0000, #d4af37, #b8860b, #8b0000);
+    background-size: 300% 300%; color: white; border: 2px solid #fff; border-radius: 50px;
+    font-size: clamp(12px, 4vw, 18px); text-align: center; display: flex; justify-content: center; align-items: center;
+    font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 2px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 10px rgba(139, 0, 0, 0.5);
+    animation: gradientAnim 4s ease infinite, pulseGlow 2s infinite alternate;
+    transition: transform 0.3s;
+}
+.btn-magic:hover { transform: scale(1.05); }
+
+@keyframes gradientAnim { 
+    0% { background-position: 0% 50%; } 
+    50% { background-position: 100% 50%; } 
+    100% { background-position: 0% 50%; } 
+}
+@keyframes pulseGlow {
+    from { box-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
+    to { box-shadow: 0 0 35px rgba(212, 175, 55, 1); }
+}
+
+/* --- 3. MODALES & FENÊTRES --- */
+#welcome-modal { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); z-index: 19000; display: none; 
+    align-items: center; justify-content: center; backdrop-filter: blur(3px); animation: fadeIn 0.5s;
+}
+.welcome-content { 
+    background: white; width: 90%; max-width: 600px; padding: 30px; 
+    border-radius: 20px; border: 3px solid #d4af37; text-align: center; 
+    position: relative; box-shadow: 0 0 50px rgba(212, 175, 55, 0.3); 
+    max-height: 90vh; overflow-y: auto;
+}
+.welcome-header { 
+    font-size: 24px; font-weight: 900; color: #8b0000; margin-bottom: 15px; 
+    text-transform: uppercase; letter-spacing: 2px; border-bottom: 2px solid #d4af37; padding-bottom: 10px; 
+}
+.welcome-text { text-align: left; font-size: 14px; line-height: 1.6; color: #333; margin-bottom: 10px; }
+.welcome-note { 
+    background: #fff3cd; border-left: 5px solid #d4af37; 
+    padding: 10px; margin: 10px 0; font-size: 13px; color: #856404; font-weight: bold;
+}
+.details-list { 
+    text-align: left; background: #f8f9fa; padding: 15px; border-radius: 12px;
+    margin: 15px 0; font-size: 13px; border-left: 4px solid #d4af37; 
+    line-height: 1.5; color: #333; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.btn-rex { 
+    width: 100%; max-width: 320px; padding: 15px 20px;
+    background: linear-gradient(135deg, #8b0000, #d4af37); color: white; 
+    border: 2px solid white; border-radius: 50px; font-size: 16px; 
+    font-weight: bold; cursor: pointer; transition: 0.3s;
+    text-transform: uppercase; letter-spacing: 1px; 
+}
+.btn-rex:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+
+/* --- 4. MENU GAUCHE --- */
+.leaflet-control-layers { 
+    left: 20px !important; top: 20px !important; width: 160px !important; 
+    background: rgba(255, 255, 255, 0.98) !important; border-radius: 15px !important; 
+    padding: 10px !important; max-height: 85vh; overflow-y: auto !important; 
+    border: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important; 
+    transition: transform 0.3s ease;
+}
+.accordion-title { 
+    color: white; padding: 10px; border-radius: 8px; cursor: pointer; 
+    font-weight: bold; margin-bottom: 5px; text-align: center; 
+    font-size: 11px; text-transform: uppercase;
+}
+/* Couleurs Catégories */
+.title-pnj { background: #8b0000; } 
+.title-bus { background: #E3CC2D; } 
+.title-shop { background: #9b59b6; } 
+.title-lieux { background: #f39c12; } 
+.title-poisson { background: #3498db; } 
+.title-insecte { background: #2ecc71; } 
+.title-animal { background: #6d4c41; }
+.title-bird { background: #E898F1; }
+.title-resource { background: #795548; }
+
+.accordion-content { display: none; margin-bottom: 10px; background: #fff; }
+.accordion-content.active { display: block; }
+
+.menu-item { display: flex; align-items: center; padding: 8px 5px; cursor: pointer; font-size: 11px; border-bottom: 1px solid #eee; color: #333; transition: background 0.2s; }
+.menu-item:hover { background: #f9f9f9; font-weight: bold; }
+.menu-item.active-resource { background: #d7ccc8; font-weight: bold; border-left: 4px solid #795548; }
+.collection-check { margin-right: 10px; accent-color: #d4af37; cursor: pointer; width: 15px; height: 15px; }
+
+/* --- 5. LÉGENDE DROITE --- */
+.ping-legend { 
+    position: fixed; right: 20px; top: 20px; width: 220px; 
+    background: rgba(0,0,0,0.9); border: 2px solid #d4af37; 
+    border-radius: 15px; padding: 15px; color: white; z-index: 1000;
+    max-height: 65vh; display: flex; flex-direction: column; transition: transform 0.3s ease;
+}
+.legend-langs { border-bottom: 1px solid #d4af37; padding-bottom: 10px; margin-bottom: 10px; }
+.btn-lang-switch {
+    width: 100%; padding: 8px 10px; background: linear-gradient(135deg, #333, #555); 
+    color: #d4af37; border: 1px solid #d4af37; border-radius: 50px; 
+    font-size: 11px; font-weight: bold; text-decoration: none; display: inline-block;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; text-align: center;
+}
+.btn-lang-switch:hover { background: #d4af37; color: #333; }
+
+#legend-list { overflow-y: auto; margin-top: 10px; flex-grow: 1; min-height: 50px; }
+.legend-item { display: flex; flex-direction: column; background: rgba(255,255,255,0.1); margin-bottom: 5px; padding: 8px; border-radius: 6px; font-size: 12px; }
+.coord-box { background: rgba(0,0,0,0.5); padding: 4px; border-radius: 4px; font-family: monospace; font-size: 10px; color: #d4af37; border: 1px solid #555; user-select: all; text-align: center; margin-top: 5px; }
+.legend-guide { margin-top: 15px; padding-top: 10px; border-top: 1px solid #d4af37; }
+.guide-row { display: flex; align-items: center; margin-bottom: 5px; font-size: 11px; color: #ccc; }
+.guide-icon { font-size: 14px; margin-right: 8px; width: 20px; text-align: center; }
+
+/* LIKE & QUIZ SECTION */
+.rating-container { margin-top: 20px; padding-top: 15px; border-top: 1px dashed #555; text-align: center; }
+.like-section { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 5px; }
+.like-btn-internal {
+    background: rgba(255, 255, 255, 0.1); border: 2px solid #d4af37; border-radius: 20px;
+    padding: 8px 20px; font-size: 14px; font-weight: bold; color: #d4af37; cursor: pointer;
+    display: flex; align-items: center; gap: 8px; transition: 0.3s; outline: none;
+}
+.like-btn-internal:hover { background: rgba(212, 175, 55, 0.2); }
+.like-btn-internal.liked { background: #d4af37; color: #3e2723; border-color: #d4af37; cursor: default; opacity: 0.8; }
+.heart-icon-anim { font-size: 18px; display: inline-block; }
+.like-btn-internal.liked .heart-icon-anim { animation: none; }
+#like-count-internal { font-size: 14px; color: #fff; font-weight: bold; font-family: monospace; }
+
+.quiz-section { margin-top: 15px; padding-top: 10px; border-top: 1px dashed #555; text-align: center; }
+#quiz-trigger {
+    width: 55px; height: 55px; background: #f39c12; border: 2px solid #fff; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 24px; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.6); transition: 0.3s;
+}
+#quiz-trigger:hover { transform: scale(1.1); background: #d4af37; }
+
+#quiz-container {
+    display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 90%; max-width: 450px; background: white; border: 3px solid #d4af37;
+    border-radius: 20px; padding: 25px; z-index: 35000; box-shadow: 0 0 100px rgba(0,0,0,0.8); text-align: center;
+}
+.quiz-option {
+    display: block; width: 100%; padding: 12px; margin: 10px 0; background: #f8f9fa;
+    border: 2px solid #eee; border-radius: 10px; cursor: pointer; font-weight: bold;
+    color: #333; transition: 0.2s;
+}
+.quiz-option:hover { background: #fff3cd; border-color: #d4af37; }
+
+/* --- 6. SOCIAL & CHAT --- */
+#social-container { position: fixed; bottom: 20px; right: 20px; z-index: 4000; display: flex; align-items: center; gap: 15px; }
+#contact-trigger {
+    width: 65px; height: 65px; background: #8b0000; border: 2px solid #d4af37; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 30px; color: white;
+    cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.6); transition: all 0.3s; order: 1;
+}
+#contact-trigger:hover { transform: scale(1.1); background: #d4af37; color: #8b0000; }
+#discord-link-wrapper { order: 2; }
+/* CORRECTION DISCORD TAILLE */
+.social-btn-img { width: 60px !important; height: 60px !important; transition: transform 0.3s ease; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); cursor: pointer; object-fit: contain; }
+.social-btn-img:hover { transform: scale(1.1); }
+
+#simple-chat-box {
+    display: none; position: fixed; bottom: 100px; right: 20px; width: 300px;
+    background: rgba(0, 0, 0, 0.95); border: 2px solid #d4af37; border-radius: 15px;
+    z-index: 5000; flex-direction: column; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    font-family: 'Segoe UI', sans-serif; overflow: hidden;
+}
+.chat-header {
+    background: #8b0000; color: white; padding: 12px; text-align: center;
+    font-weight: 900; text-transform: uppercase; border-bottom: 2px solid #d4af37;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.close-chat { background: none; border: none; color: white; font-weight: bold; cursor: pointer; font-size: 18px; }
+.chat-form { padding: 15px; color: white; }
+.chat-label { font-size: 12px; color: #d4af37; margin-bottom: 5px; display: block; font-weight: bold; }
+.chat-input, .chat-textarea {
+    width: 100%; padding: 8px; margin-bottom: 15px; background: #222;
+    border: 1px solid #555; color: white; border-radius: 5px; font-family: inherit;
+}
+.chat-textarea { height: 80px; resize: none; }
+.chat-submit {
+    width: 100%; background: linear-gradient(135deg, #8b0000, #d4af37);
+    color: white; border: none; padding: 10px; border-radius: 5px;
+    font-weight: bold; cursor: pointer; text-transform: uppercase;
+}
+.chat-submit:hover { opacity: 0.9; }
+#chat-status { text-align: center; font-size: 12px; margin-top: 10px; color: #aaa; }
+.chat-footer-mail {
+    text-align: center; margin-top: 15px; padding-top: 10px; border-top: 1px dashed #444; font-size: 11px; color: #aaa;
+}
+.chat-footer-mail a { color: #d4af37; text-decoration: none; }
+.chat-footer-mail a:hover { text-decoration: underline; }
+
+/* --- 7. OVERLAY & MAP ITEMS --- */
+#overlay-info { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 30000; display: none; 
+    align-items: center; justify-content: center; 
+}
+.info-card { 
+    background: white; padding: 25px; border-radius: 20px; border: 3px solid #d4af37;
+    width: 450px; text-align: center; max-width: 95%; 
+}
+.info-card img { width: 100%; display: block; margin: 0 auto; }
+
+.label-ville { background: white !important; border: 2px solid #3498db !important; border-radius: 5px; padding: 2px 8px; font-weight: bold; font-size: 11px; color: #2980b9; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.label-eau { background: rgba(41, 128, 185, 0.8) !important; border: 1px solid #fff !important; border-radius: 5px; padding: 2px 8px; font-size: 10px; color: white; font-weight: bold; white-space: nowrap; }
+.invisible-marker { background: transparent !important; border: none !important; }
+.pnj-icon { width: 35px !important; height: 35px !important; transition: width 0.3s, height 0.3s; }
+.resource-icon { width: 30px !important; height: 30px !important; filter: drop-shadow(0 0 2px white); }
+.heartopia-popup .leaflet-popup-content-wrapper { background: rgba(255, 255, 255, 0.95); border: 2px solid #d4af37; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); padding: 0; text-align: center; }
+.heartopia-popup .leaflet-popup-content { margin: 8px 12px; font-weight: 900; color: #8b0000; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; font-family: 'Segoe UI', sans-serif; }
+.heartopia-popup .leaflet-popup-tip { background: #d4af37; width: 12px; height: 12px; margin: -6px auto 0; box-shadow: none; }
+.heartopia-popup a.leaflet-popup-close-button { display: none; }
+
+.smooth-move { transition: transform 7s linear !important; }
+.albert-walk { transition: transform 2s linear !important; }
+.is-zooming .leaflet-marker-icon { transition: none !important; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* --- 8. MOBILE --- */
+#mobile-menu-toggle, #mobile-legend-toggle { 
+    display: none; position: fixed; top: 10px; z-index: 5000;
+    width: 40px; height: 40px; border-radius: 8px; border: 2px solid white;
+    font-size: 20px; cursor: pointer; align-items: center; justify-content: center;
+}
+#mobile-menu-toggle { left: 10px; background: #8b0000; color: white; border-color: #d4af37; }
+#mobile-legend-toggle { right: 10px; background: #d4af37; color: black; }
+
+@media only screen and (min-width: 769px) { .pc-only { display: block; } }
+@media only screen and (max-width: 768px) {
+    .pc-only { display: none !important; }
+    .heartopia-title { font-size: 32px; letter-spacing: 2px; }
+    .welcome-box { padding: 20px; width: 90%; }
+    .official-link-text { font-size: 14px; padding: 10px 15px; width: 90%; display: inline-block; }
+    #mobile-menu-toggle, #mobile-legend-toggle { display: flex; }
+    .leaflet-control-layers { transform: translateX(-200%); width: 220px !important; top: 60px !important; left: 10px !important; max-height: 70vh; }
+    .leaflet-control-layers.mobile-visible { transform: translateX(0); }
+    .ping-legend { transform: translateX(150%); width: 250px; top: 60px; right: 10px; }
+    .ping-legend.mobile-visible { transform: translateX(0); }
+    #social-container { bottom: 20px; right: 10px; gap: 8px; }
+    .social-btn-img { width: 50px !important; height: 50px !important; }
+    #contact-trigger { width: 50px; height: 50px; font-size: 24px; }
+    #simple-chat-box { width: 280px; bottom: 80px; right: 10px; }
+    .welcome-content { padding: 15px; width: 95%; }
+    .welcome-header { font-size: 20px; }
+}

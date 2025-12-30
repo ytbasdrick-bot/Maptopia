@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Maptopia TH - ระบบ Heartopia</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+    <div id="quiz-container">
+        <div style="font-size: 40px; margin-bottom: 10px;">🎓</div>
+        <h2 id="quiz-question" style="color: #8b0000; font-size: 20px; margin-top: 0;"></h2>
+        <div id="quiz-options"></div>
+        <p id="quiz-feedback" style="margin-top: 15px; font-weight: 900; font-size: 18px;"></p>
+        <button onclick="closeQuiz()" style="margin-top: 15px; background: #8b0000; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: bold;">ออกจากแบบทดสอบ</button>
+    </div>
+
+    <audio id="main-audio"><source src="sonheartopia.mp4" type="audio/mp4"></audio>
+
+    <button id="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+    <button id="mobile-legend-toggle" onclick="toggleMobileLegend()">📌</button>
+
+    <div id="intro-screen">
+        <a href="https://heartopia.xd.com/en" target="_blank" class="official-link-text" title="เว็บไซต์ทางการ Heartopia">
+            ลิงก์ทางการ HEARTOPIA
+        </a>
+
+        <h1 class="heartopia-title">MAPTOPIA TH</h1>
+        <div class="welcome-box">
+            <p>สำรวจแผนที่อินเทอร์แอคทีฟอย่างเป็นทางการของชุมชน Heartopia</p>
+            <div class="btn-container">
+                <button id="enter-button" class="btn-magic" onclick="startExperience()">✨ เข้าสู่แผนที่ ✨</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="welcome-modal">
+        <div class="welcome-content">
+            <div class="welcome-header">ชาว HEARTOPIA ที่รัก</div>
+            <div class="welcome-text">
+                ยินดีต้อนรับสู่ <b>Maptopia</b> เพื่อนร่วมทางในการสำรวจ Heartopia ของคุณ!<br>
+             
+                <div class="details-list">
+                    • <b>การนำทาง:</b> เมนูขนาดกะทัดรัดทางซ้ายเพื่อกรองข้อมูล<br>
+                    <span class="pc-only">• <b>ตัวมาร์ก:</b> <b>คลิกขวา</b> เพื่อปักหมุดจุดของคุณเอง<br></span>
+                    • <b>คอลเลกชัน:</b> ติ๊กช่องในเมนู "ปลา", "แมลง" และ "นก" เพื่อติดตามความคืบหน้า<br>
+                    • <b>ทรัพยากร:</b> ใหม่! แสดงโซนรวบรวม (ไม้, แร่, ผลไม้) บนแผนที่<br>
+                    • <b>ติดต่อ:</b> ใช้ไอคอนข้อความ 💬 ที่ด้านขวาล่างเพื่อส่งข้อความส่วนตัวถึงทีมงาน<br>
+                    • <b>อีเมล:</b> คุณสามารถเขียนถึงเราได้ที่ <b>maptopiafr@gmail.com</b><br>
+                    • <b>การสำรองข้อมูล:</b> ข้อมูลของคุณจะถูกบันทึกไว้ที่นี่
+                </div>
+
+                <div class="welcome-note">
+                    🐾 <b>หมายเหตุเกี่ยวกับการเคลื่อนไหว:</b><br>
+                    การเคลื่อนไหวของสัตว์เป็นสิ่งสมมติแต่อิงตามโซนจริงของพวกมัน
+                    Albert Jr. จะเดินสำรวจหมู่บ้านเพื่อนำทางคุณ
+                </div>
+                🛠️ <b>สถานะโครงการ:</b><br>
+                เว็บไซต์นี้กำลังอยู่ระหว่างการพัฒนา
+            </div>
+            <button class="btn-rex" onclick="closeWelcome()">ไปกันเลย!</button>
+        </div>
+    </div>
+
+    <div id="social-container">
+        <div id="contact-trigger" onclick="toggleChat()">💬</div>
+        <a href="https://discord.gg/M4BkXRhhUw" target="_blank" title="เข้าร่วม Discord" id="discord-link-wrapper">
+            <img src="Discord-Logo-PNG-Pic.png" id="discord-img" class="social-btn-img" alt="Discord">
+        </a>
+    </div>
+
+    <div id="simple-chat-box">
+        <div class="chat-header">
+            <span>ติดต่อทีมงาน</span>
+            <button class="close-chat" onclick="toggleChat()">X</button>
+        </div>
+        <div class="chat-form">
+            <label class="chat-label">ชื่อ DISCORD ของคุณ (สำหรับการตอบกลับ)</label>
+            <input type="text" id="user-name" class="chat-input" placeholder="ตัวอย่าง: Rex#1234">
+
+            <label class="chat-label">ข้อความของคุณ</label>
+            <textarea id="user-msg" class="chat-textarea" placeholder="มีความคิดเห็น? เจอข้อผิดพลาด? บอกเราได้เลย..."></textarea>
+
+            <button class="chat-submit" onclick="sendToDiscord()">ส่ง</button>
+            <div id="chat-status"></div>
+
+            <div class="chat-footer-mail">
+                หรือทางอีเมล: <a href="mailto:maptopiafr@gmail.com?subject=Contact%20Maptopia">maptopiafr@gmail.com</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ping-legend" id="legend-box">
+        <div class="language-selector legend-langs" style="margin-bottom: 10px; display: flex; gap: 8px; justify-content: center;">
+            <a href="index.html" class="btn-lang-switch">🌍 เปลี่ยนภาษา</a>
+        </div>
+
+        <div style="text-align:center; font-weight:bold; border-bottom:1px solid #d4af37; padding-bottom:5px; font-size:12px;"></div>
+        
+        <div style="text-align:center; font-weight:bold; border-bottom:1px solid #d4af37; padding-bottom:5px; font-size:12px;">📌 ตัวมาร์กของฉัน</div>
+        <div id="legend-list"></div>
+        <div class="legend-guide">
+            <div class="guide-row pc-only"><span class="guide-icon">🖥️</span><span><b>คอมพิวเตอร์:</b> คลิกขวา = ปักหมุด</span></div>
+            <div class="guide-row"><span class="guide-icon">📱</span><span><b>มือถือ:</b> เมนูซ้ายบน</span></div>
+        </div>
+
+        <div class="rating-container">
+            <div class="like-section">
+                <button id="like-btn-internal" class="like-btn-internal" onclick="toggleLikeInternal()">
+                    <span class="heart-icon-anim">❤</span> ถูกใจแผนที่
+                </button>
+                <span id="like-count-internal">กำลังโหลด...</span>
+            </div>
+            <p style="font-size:9px; color:#777; margin-top:5px;">(คลิกเพื่อสนับสนุน!)</p>
+        </div>
+        <div class="quiz-section">
+            <p style="font-size:10px; color:#aaa; margin-bottom:5px; text-align:center;">ทดสอบความรู้ของคุณ</p>
+            <div style="display: flex; justify-content: center;">
+                <div id="quiz-trigger" onclick="openQuiz()">🎓</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="overlay-info" onclick="this.style.display='none'" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10000; justify-content:center; align-items:center;">
+        <div class="info-card" onclick="event.stopPropagation()" style="background:white; padding:5px; border-radius:50px; width:95%; max-width:530px; text-align:center; max-height: 90vh; overflow-y: auto;">
+            <h2 id="info-name" style="color:#8b0000; margin-top:0; text-transform:uppercase; border-bottom: 2px solid #d4af37; padding-bottom: 5px;"></h2>
+
+            <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: center;">
+                <div style="flex: 1;">
+                    <p style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">สภาพอากาศ</p>
+                    <img id="info-weather" src="" style="width:100%; border-radius:8px; border: 1px solid #eee;">
+                </div>
+                <div style="flex: 1;">
+                    <p style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">ตารางเวลา</p>
+                    <img id="info-time" src="" style="width:100%; border-radius:8px; border: 1px solid #eee;">
+                </div>
+            </div>
+
+            <div style="width: 100%; margin-top: 10px;">
+                <p style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">โซนจับสัตว์</p>
+                <img id="info-loc" src="" style="width:100%; max-width: 550px; border-radius:12px; border: 2px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </div>
+
+            <button onclick="document.getElementById('overlay-info').style.display='none'" style="margin-top:20px; padding:12px 30px; cursor:pointer; background:#8b0000; color:white; border:none; border-radius:50px; font-weight:bold; text-transform:uppercase;">ปิด</button>
+        </div>
+    </div>
+
+    <script src="data-thai.js"></script>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
