@@ -118,7 +118,7 @@
         body.animating #transition-screen { opacity: 1; }
 
         #main-header {
-            position: relative; z-index: 20; text-align: center; color: white; margin-bottom: 30px;
+            position: relative; z-index: 20; text-align: center; color: white; margin-bottom: 20px;
             transition: opacity 0.3s ease, transform 0.1s ease-out; padding: 0 20px;
         }
 
@@ -139,40 +139,48 @@
         #ui-layer {
             position: relative; z-index: 30;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            /* Changement ici: 4 colonnes au lieu de 3 pour gagner de la place */
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px; /* Espacement réduit (était 15px) */
             width: 100%;
-            max-width: 750px;
+            max-width: 850px; /* Légèrement plus large */
             transition: opacity 0.3s ease, transform 0.1s ease-out;
             padding: 10px;
         }
 
         .lang-card {
-            text-decoration: none; color: white; font-size: 14px; font-weight: bold; text-transform: uppercase; 
-            letter-spacing: 1px; padding: 15px; text-align: center; 
+            text-decoration: none; color: white; 
+            font-size: 12px; /* Police réduite (était 14px) */
+            font-weight: bold; text-transform: uppercase; 
+            letter-spacing: 1px; 
+            padding: 10px 5px; /* Padding réduit (était 15px) */
+            text-align: center; 
             background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px;
             transition: all 0.3s ease; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
+            min-height: 40px; /* Hauteur minimale fixée */
         }
 
         .lang-card:hover { 
             background: rgba(255, 255, 255, 0.15); border-color: #ffd700; 
-            transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
+            transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
         }
 
         body.animating #ui-layer, body.animating #main-header { opacity: 0; pointer-events: none; }
 
         @media only screen and (max-width: 768px) {
             #ui-layer { 
-                grid-template-columns: repeat(2, 1fr);
-                width: 95%; gap: 10px; max-height: 50vh; overflow-y: auto; 
+                grid-template-columns: repeat(2, 1fr); /* Reste en 2 colonnes sur mobile */
+                width: 95%; gap: 6px; 
+                max-height: 55vh; overflow-y: auto; 
             }
             .hero-title { font-size: 2.2rem; letter-spacing: 4px; }
             .welcome-subtitle { font-size: 0.9rem; }
             #char-wrapper { height: 35%; }
             .lock-icon { font-size: 60px; }
             .unlock-text { font-size: 1rem; }
+            .lang-card { padding: 12px 5px; font-size: 11px; } /* Ajustement mobile */
         }
     </style>
 </head>
@@ -216,7 +224,7 @@
             <a href="indexpo.html" class="lang-card">Português</a>
 
             <a href="indexch.html" class="lang-card">中文 (Chinese)</a>
-            <a href="indexin.html" class="lang-card">Bahasa Indonesia</a>
+            <a href="indexja.html" class="lang-card">日本語 (Japanese)</a> <a href="indexko.html" class="lang-card">한국어 (Korean)</a>   <a href="indexin.html" class="lang-card">Bahasa Indonesia</a>
             <a href="indexthai.html" class="lang-card">ไทย (Thai)</a>
         </div>
     </div>
@@ -234,9 +242,11 @@
             'de': "Klicken, um die Welt freizuschalten",
             'it': "Clicca per sbloccare il mondo",
             'pt': "Clique para desbloquear o mundo",
-            'zh': "点击解锁世界", // Chinois
+            'zh': "点击解锁世界", 
             'id': "Klik untuk membuka dunia",
-            'th': "คลิกเพื่อปลดล็อกโลก"
+            'th': "คลิกเพื่อปลดล็อกโลก",
+            'ja': "クリックして世界のロックを解除", // Japonais
+            'ko': "세계를 잠금 해제하려면 클릭하세요" // Coréen
         };
 
         // Détecter la langue du navigateur (ex: "fr-FR" -> "fr")
