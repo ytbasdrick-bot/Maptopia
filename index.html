@@ -17,7 +17,7 @@
     <meta name="apple-mobile-web-app-title" content="Maptopia">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Lemon&family=Raleway:wght@300;700&display=swap" rel="stylesheet">
 
     <style>
         /* --- BASES --- */
@@ -131,6 +131,35 @@
         .welcome-subtitle { font-size: 1.2rem; margin-top: 15px; letter-spacing: 2px; }
         .gold-text { color: #ffd700; font-weight: bold; }
 
+        /* --- BOUTON WIKI (POLICE LEMON) --- */
+        .wiki-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 25px;
+            border: 2px solid #ffd700;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffd700;
+            /* CHANGEMENT ICI : Police Lemon */
+            font-family: 'Lemon', serif;
+            font-size: 1rem;
+            text-decoration: none;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+            position: relative;
+            z-index: 25;
+            text-transform: uppercase;
+        }
+
+        .wiki-btn:hover {
+            background: #ffd700;
+            color: #000;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            transform: scale(1.05) translateY(-3px);
+            text-shadow: none;
+        }
+
         /* --- SELECTION DE LANGUE --- */
         #ui-layer {
             position: relative; z-index: 30;
@@ -156,7 +185,7 @@
 
         .span-2 { grid-column: span 2; }
 
-        /* --- SIGNATURE ASDRICK (AGRANDIE) --- */
+        /* --- SIGNATURE ASDRICK --- */
         .footer-signature {
             position: absolute; bottom: 35px; width: 100%; text-align: center; z-index: 40;
             font-family: 'Raleway', sans-serif; font-size: 1.1rem; color: rgba(255, 255, 255, 0.6);
@@ -175,6 +204,7 @@
             .span-2 { grid-column: auto; }
             .hero-title { font-size: 2.2rem; }
             .welcome-subtitle { font-size: 0.9rem; }
+            .wiki-btn { font-size: 0.9rem; padding: 8px 20px; margin-top: 15px; } 
             .footer-signature { bottom: 20px; font-size: 0.8rem; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); padding: 15px 0; }
             .footer-signature span { font-size: 1.2rem; }
         }
@@ -208,6 +238,8 @@
             <p class="welcome-subtitle">
                 Ne regardez pas seulement la carte. Vivez le <span class="gold-text">voyage</span>.
             </p>
+            
+            <a href="https://jayibwi.wixsite.com/wikitopia-guide" target="_blank" class="wiki-btn">WIKI BY JUNE</a>
         </header>
 
         <div id="ui-layer">
@@ -269,9 +301,13 @@
             setTimeout(() => { window.location.href = destination; }, 1400);
         }
 
-        document.querySelectorAll('.lang-card').forEach(card => {
+        document.querySelectorAll('.lang-card, .wiki-btn').forEach(card => {
             card.addEventListener('mouseenter', () => { hoverSound.currentTime = 0; hoverSound.play().catch(() => {}); });
-            card.addEventListener('click', function(e) { e.preventDefault(); triggerTransition(this.getAttribute('href')); });
+            card.addEventListener('click', function(e) { 
+                if(this.classList.contains('wiki-btn')) return;
+                e.preventDefault(); 
+                triggerTransition(this.getAttribute('href')); 
+            });
         });
     </script>
 </body>
