@@ -1,6 +1,6 @@
-// --- KOREAN DATA (data-kr.js) ---
+// --- 한국어 데이터 (data-ko.js) ---
 
-// 1. UI TEXTS (Interface)
+// 1. UI 텍스트
 const TEXTS = {
     title: "MAPTOPIA KR",
     enterBtn: "✨ 지도 입장 ✨",
@@ -16,16 +16,16 @@ const TEXTS = {
         resources: "자원"
     },
     chat: {
-        success: "✅ 메시지가 전송되었습니다!",
-        error: "❌ 전송 실패.",
-        incomplete: "⚠️ 모든 필드를 입력해주세요.",
+        success: "✅ 메시지가 성공적으로 전송되었습니다!",
+        error: "❌ 전송 오류.",
+        incomplete: "⚠️ 모든 필드를 입력해 주세요.",
         wait: "전송 중..."
     },
     quiz: {
         success: "✅ 정답!",
         error: "❌ 오답!",
         finishTitle: "🏆 전문가 인증!",
-        finishText: "당신은 하토피아를 완벽하게 알고 있습니다.",
+        finishText: "당신은 하트토피아에 대해 모든 것을 알고 있습니다.",
         quitBtn: "퀴즈 종료"
     },
     like: {
@@ -34,43 +34,44 @@ const TEXTS = {
     }
 };
 
-// 2. NPC LIST
+// 2. NPC 목록
 const PNJ_DATA = [
-    [-471, 501, "Bob", "pnj/bob.png"],
-    [-526, 499, "Atara", "pnj/atara.png"],
+    [-471, 501, "밥", "pnj/bob.png"],
+    [-526, 499, "아타라", "pnj/atara.png"],
     [-478, 493, "수집가", "pnj/collectioneur.png"],
-    [-469, 488, "Dorothée", "pnj/dorothée.png"],
-    [-446, 493, "Massimo", "pnj/massimo.png"],
-    [-412, 418, "Ka Ching", "pnj/ka ching.png"],
-    [-399, 591, "Andrew", "pnj/andrew.png"],
-    [-259, 522, "Eric", "pnj/eric.png"],
-    [-456, 549, "Vanya", "pnj/vanya.png"],
-    [-502, 582, "Naniwa", "pnj/naniwa.png"],
-    [-502, 519, "Joan", "pnj/mme joan.png"],
-    [-807, 419, "Will", "pnj/will.png"],
-    [-355, 809, "Patti", "pnj/patti.png"],
-    [-653, 225, "Vernie", "pnj/vernie.png"],
-    [-498, 526, "Bayley", "pnj/bayleyj.png"],
-    [-528.3, 560.3, "Blanc", "pnj/blanc.png"],
-    [-499.8, 499.0, "Annie", "pnj/annie.png"],
-    [-532.4, 634.8, "Albert Jr.", "pnj/albert jr.png"],
-    [-734.8, 445.8, "Bill", "pnj/bill.png"]
+    [-469, 488, "도로시", "pnj/dorothée.png"],
+    [-446, 493, "마시모", "pnj/massimo.png"],
+    [-412, 418, "카칭", "pnj/ka ching.png"],
+    [-399, 591, "앤드류", "pnj/andrew.png"],
+    [-259, 522, "에릭", "pnj/eric.png"],
+    [-456, 549, "바냐", "pnj/vanya.png"],
+    [-502, 582, "나니와", "pnj/naniwa.png"],
+    [-502, 519, "조안 부인", "pnj/mme joan.png"],
+    [-807, 419, "윌", "pnj/will.png"],
+    [-355, 809, "패티", "pnj/patti.png"],
+    [-653, 225, "버니", "pnj/vernie.png"],
+    [-498, 526, "베일리 J", "pnj/bayleyj.png"],
+    [-528.3, 560.3, "블랑", "pnj/blanc.png"],
+    [-499.8, 499.0, "애니", "pnj/annie.png"],
+    [-532.4, 634.8, "앨버트 Jr.", "pnj/albert jr.png"],
+    [-734.8, 445.8, "빌", "pnj/bill.png"],
+    [-509.4, 414, "도리스 (비)", "pnj/doris.png"]
 ];
 
-// 3. BUS STOPS
+// 3. 버스 정류장
 const BUS_DATA = [
-    ["서쪽 교외",[-533,340]], ["마을 교외",[-519,639]], ["어촌",[-654,479]], 
+    ["서쪽 교외",[-533,340]], ["교외 마을",[-519,639]], ["낚시꾼 마을",[-654,479]], 
     ["꽃밭",[-532,218]], ["온천 산",[-222,512]], ["북쪽 교외",[-373,480]], 
     ["중앙 광장",[-497,481]], ["숲",[-500,798]]
 ];
 
-// 4. SHOPS
+// 4. 상점
 const SHOP_DATA = [
-    [-472,487,"옷가게","vetement.png"],[-474,503,"가구점","Meuble.png"],
-    [-496.4,520.6,"애완동물 가게","chien.png"],[-440,467,"서점","Librairie.png"]
+    [-472,487,"옷 가게","vetement.png"],[-474,503,"가구점","Meuble.png"],
+    [-496.4,520.6,"펫샵","chien.png"],[-440,467,"서점","Librairie.png"]
 ];
 
-// 5. ANIMALS
+// 5. 동물
 const ANIMAL_DATA = [
     {pos: [-691, 783], name: "판다", img: "panda.png", radius: 60},
     {pos: [-184, 291], name: "카피바라", img: "capybara.png", radius: 50},
@@ -82,24 +83,24 @@ const ANIMAL_DATA = [
     {pos: [-725, 208], name: "라마", img: "lama.png", radius: 50}
 ];
 
-// 6. LOCATIONS
+// 6. 장소
 const LIEUX_DATA = [
     {pos:[-538,492], name:"중앙 광장", type:"label-ville", startOn:true}, 
-    {pos:[-692,506], name:"어촌", type:"label-ville", startOn:true}, 
+    {pos:[-692,506], name:"낚시꾼 마을", type:"label-ville", startOn:true}, 
     {pos:[-438,513], name:"주민 거리", type:"label-ville", startOn:true}, 
     {pos:[-649,185], name:"꽃밭", type:"label-ville", startOn:true}, 
     {pos:[-440,184], name:"고래 산", type:"label-ville", startOn:true}, 
-    {pos:[-184,291], name:"유적지", type:"label-ville", startOn:true}, 
+    {pos:[-184,291], name:"폐허", type:"label-ville", startOn:true}, 
     {pos:[-223,501], name:"온천 산", type:"label-ville", startOn:true}, 
     {pos:[-228,627], name:"바위 절벽", type:"label-ville", startOn:true}, 
-    {pos:[-531,805], name:"오크 숲", type:"label-ville", startOn:true}, 
-    {pos:[-494,429], name:"예술 거리", type:"label-ville", startOn:true}, 
-    {pos:[-510,558], name:"정원 거리", type:"label-ville", startOn:true}, 
-    {pos:[-736,602], name:"동양 부두", type:"label-ville", startOn:true}, 
+    {pos:[-531,805], name:"참나무 숲", type:"label-ville", startOn:true}, 
+    {pos:[-494,429], name:"예술의 거리", type:"label-ville", startOn:true}, 
+    {pos:[-510,558], name:"정원의 거리", type:"label-ville", startOn:true}, 
+    {pos:[-736,602], name:"동쪽 부두", type:"label-ville", startOn:true}, 
     {pos:[-690,402], name:"부두", type:"label-ville", startOn:true}, 
     {pos:[-780,387], name:"등대", type:"label-ville", startOn:true}, 
     {pos:[-691,783], name:"다이빙 대", type:"label-ville", startOn:true}, 
-    {pos:[-338,933], name:"숲 섬", type:"label-ville", startOn:true}, 
+    {pos:[-338,933], name:"숲의 섬", type:"label-ville", startOn:true}, 
     {pos:[-587,406], name:"교외", type:"label-ville", startOn:true}, 
     {pos:[-725,208], name:"보라색 해변", type:"label-ville", startOn:true}, 
     {pos:[-783,478], name:"고요한 바다", type:"label-eau", startOn:true}, 
@@ -111,35 +112,74 @@ const LIEUX_DATA = [
     {pos:[-265,537], name:"온천 호수", type:"label-eau", startOn:true}, 
     {pos:[-344,652], name:"얕은 강", type:"label-eau", startOn:true}, 
     {pos:[-598,748], name:"숲 호수", type:"label-eau", startOn:true}, 
-    {pos:[-431,774], name:"숲 상류 호수", type:"label-eau", startOn:true}, 
+    {pos:[-431,774], name:"상류 숲 호수", type:"label-eau", startOn:true}, 
     {pos:[-608,481], name:"교외 호수", type:"label-eau", startOn:true}, 
-    {pos:[-669,368], name:"조용한 강", type:"label-eau", startOn:true}, 
+    {pos:[-669,368], name:"평온한 강", type:"label-eau", startOn:true}, 
     {pos:[-674,627], name:"거대 나무 강", type:"label-eau", startOn:true}, 
     {pos:[-600,600], name:"풍차 꽃밭", type:"label-ville", startOn:true}, 
-    {pos:[-670,450], name:"동쪽 부교", type:"label-ville", startOn:true}
+    {pos:[-670,450], name:"동쪽 폰툰", type:"label-ville", startOn:true}
 ];
 
 // 7. 자원
 const resourcesData = {
-    "산딸기": { icon: "resource/framboise.png", positions: [[-680.8, 330.9], [-668.5, 352.1], [-667.9, 268.5], [-648.3, 288.6], [-613.5, 317.4], [-602.8, 274.5], [-617.6, 211.6], [-571.5, 254.4], [-538.9, 208.6], [-527.8, 251.6], [-535.8, 288.3], [-503.1, 242.9], [-495, 222.4], [-453.8, 222.4], [-438.6, 246], [-395, 247.4], [-387.1, 269.5]] },
+    "라즈베리": { icon: "resource/framboise.png", positions: [[-680.8, 330.9], [-668.5, 352.1], [-667.9, 268.5], [-648.3, 288.6], [-613.5, 317.4], [-602.8, 274.5], [-617.6, 211.6], [-571.5, 254.4], [-538.9, 208.6], [-527.8, 251.6], [-535.8, 288.3], [-503.1, 242.9], [-495, 222.4], [-453.8, 222.4], [-438.6, 246], [-395, 247.4], [-387.1, 269.5]] },
     "블루베리": { icon: "resource/myrtille.png", positions: [[-642.9, 371.9], [-631.9, 368.4], [-628.5, 365.5], [-606.8, 350.3], [-602.5, 342.3], [-590.1, 334.1], [-575.6, 332.1], [-562.1, 330], [-544.9, 324.5], [-518.4, 320.3], [-515.9, 320.5], [-500.8, 321.1], [-479.3, 328.6], [-468.3, 320], [-437.3, 313.9], [-411.4, 311.4], [-400.3, 311.4], [-379.5, 304.1], [-327.4, 352], [-313.6, 339], [-328.6, 371.5], [-324.4, 389.3], [-297.9, 410.8], [-271.6, 395.4], [-319.9, 413.5], [-330.4, 421.6], [-333.4, 450], [-338.6, 468.6], [-297.4, 484.4], [-349, 489.4], [-356.5, 499.3], [-360.4, 526.4], [-355.5, 545.1], [-352.9, 565.9], [-316, 558.1], [-363.6, 578.4], [-365.3, 609], [-360.9, 628.1], [-343, 634], [-388, 655.4], [-400.9, 654.3], [-421.9, 656.4], [-444.1, 670.6], [-462.5, 654], [-476.8, 654.6], [-491.6, 656.3], [-506.4, 672.4], [-525.4, 688], [-542.6, 650], [-559.3, 644.9], [-575.6, 651], [-597.8, 643.8], [-604.8, 633.8], [-627.9, 619.4]] },
     "사과": { icon: "resource/pomme.png", positions: [[-356.3, 493], [-365.4, 560.1], [-362.4, 581], [-324.6, 570.1], [-296, 610.3], [-365.6, 619.5], [-362.8, 628.5], [-393.5, 654.8], [-420.6, 653.3], [-436.1, 665.4], [-444.4, 685.1], [-436.6, 697.5], [-458.4, 744.9], [-505, 677.3], [-494.5, 657], [-459.8, 653.6], [-530.1, 677.9], [-540.1, 648.6], [-592.8, 676.6], [-606.9, 634.1], [-629.3, 623]] },
     "큰 나무": { icon: "resource/grand arbre.png", positions: [[-612, 424.5], [-641.8, 369], [-351, 329.5], [-414.3, 337.1], [-396.3, 608.9], [-376.3, 624], [-616, 593.6], [-672.3, 642]] },
-    "단단한 나무": { icon: "resource/bois de chaine glissant.png", positions: [[-532, 787.3]] },
     "돌": { icon: "resource/pierre.png", positions: [[-615.9, 316], [-641.5, 278.8], [-558.4, 257.4], [-535, 292], [-499.5, 241.1], [-466.8, 283.1], [-407.1, 244.1], [-284, 402.8], [-254.6, 367.9], [-309.4, 479.1], [-263, 466.6], [-289.1, 544.6], [-315.5, 567.9], [-298.6, 625.4], [-391.3, 726.9], [-443.6, 697], [-468.6, 733.8], [-519, 714.9], [-564.9, 732.8], [-605.1, 680.3], [-673.9, 684.1]] },
-    "형석": { icon: "resource/fluorite.png", positions: [[-417.8, 313.8]] },
     "오렌지": { icon: "resource/orange.png", positions: [[-650.1, 370.9], [-639.5, 372], [-607.3, 351.4], [-602.9, 343.5], [-588.6, 336.6], [-559.6, 329.5], [-542.1, 324.8], [-515, 319.5], [-470.5, 321], [-461.4, 271.5], [-410.8, 314], [-397.3, 310.1], [-310.9, 339.3], [-327.6, 373.9], [-324.9, 391.9], [-295.4, 411.1], [-330.4, 420.9], [-333.8, 452.9]] },
-    "포르치니": { icon: "resource/cépes de bordeaux.png", positions: [[-615, 796.9], [-620, 778.1], [-610.6, 759.9], [-634.9, 745.5], [-650, 773.5], [-639, 800.6], [-543.5, 776.3], [-523.6, 777], [-524.3, 818.9], [-479.9, 780.8], [-464.3, 775.6], [-472.1, 801], [-477.3, 825.8], [-438.4, 789.3], [-410.5, 776.8], [-404.1, 794.1], [-415.8, 799.1]] },
-    "검은 송로버섯": { icon: "resource/truffes noires.png", positions: [[-358.1, 911.1], [-357.4, 926.1], [-340.4, 913.6], [-325.8, 920], [-342.1, 956.5], [-363.3, 961.8]] },
-    "표고버섯": { icon: "resource/Lentins du chene.png", positions: [[-772.3, 411.8], [-763.5, 397], [-736.8, 426.1], [-717.3, 446.8], [-705.8, 432.1], [-667.1, 462.5], [-666.6, 482.5], [-698.5, 491.8], [-698.3, 520.5], [-690.3, 542.6], [-686.4, 553.1], [-719.8, 546.6], [-724.8, 555.3], [-707.5, 575.9], [-714.9, 596.3]] },
-    "무세론": { icon: "resource/mousseron.png", positions: [[-676.3, 271.5], [-667.8, 264], [-686.3, 260.8], [-706.3, 253.5], [-632.8, 247.3], [-601.3, 229.5], [-577.5, 242.8], [-553.5, 237.3], [-491.8, 177.8], [-480.5, 192.5], [-459.8, 225.8], [-440.3, 230.3], [-420.3, 202.8], [-408.3, 178.8]] },
-    "느타리버섯": { icon: "resource/pleurote.png", positions: [[-220.5, 355.3], [-207.5, 352.6], [-145.3, 303], [-162.5, 296], [-190.5, 294.3], [-210.3, 301.8], [-221.3, 310], [-214, 421.1], [-196.1, 428.4], [-174.4, 399.8], [-212.6, 470.8], [-232.5, 522.3], [-205.8, 512.4], [-194.9, 526.1], [-169, 510.6], [-167.9, 533.9], [-186, 547.6], [-189.3, 583.9]] }
+    "포르치니 버섯": { 
+        icon: "resource/cépes de bordeaux.png", 
+        positions: [
+            [-615, 796.9], [-620, 778.1], [-610.6, 759.9], [-634.9, 745.5], 
+            [-650, 773.5], [-639, 800.6], [-543.5, 776.3], [-523.6, 777], 
+            [-524.3, 818.9], [-479.9, 780.8], [-464.3, 775.6], [-472.1, 801], 
+            [-477.3, 825.8], [-438.4, 789.3], [-410.5, 776.8], [-404.1, 794.1], 
+            [-415.8, 799.1]
+        ] 
+    },
+    "블랙 트러플": { 
+        icon: "resource/truffes noires.png", 
+        positions: [
+            [-358.1, 911.1], [-357.4, 926.1], [-340.4, 913.6], [-325.8, 920], 
+            [-342.1, 956.5], [-363.3, 961.8]
+        ] 
+    },
+    "표고버섯": { 
+        icon: "resource/Lentins du chene.png", 
+        positions: [
+            [-772.3, 411.8], [-763.5, 397], [-736.8, 426.1], [-717.3, 446.8], 
+            [-705.8, 432.1], [-667.1, 462.5], [-666.6, 482.5], [-698.5, 491.8], 
+            [-698.3, 520.5], [-690.3, 542.6], [-686.4, 553.1], [-719.8, 546.6], 
+            [-724.8, 555.3], [-707.5, 575.9], [-714.9, 596.3]
+        ] 
+    },
+    "송이버섯": { 
+        icon: "resource/mousseron.png", 
+        positions: [
+            [-676.3, 271.5], [-667.8, 264], [-686.3, 260.8], [-706.3, 253.5], 
+            [-632.8, 247.3], [-601.3, 229.5], [-577.5, 242.8], [-553.5, 237.3], 
+            [-491.8, 177.8], [-480.5, 192.5], [-459.8, 225.8], [-440.3, 230.3], 
+            [-420.3, 202.8], [-408.3, 178.8]
+        ] 
+    },
+    "느타리버섯": { 
+        icon: "resource/pleurote.png", 
+        positions: [
+            [-220.5, 355.3], [-207.5, 352.6], [-145.3, 303], [-162.5, 296], 
+            [-190.5, 294.3], [-210.3, 301.8], [-221.3, 310], [-214, 421.1], 
+            [-196.1, 428.4], [-174.4, 399.8], [-212.6, 470.8], [-232.5, 522.3], 
+            [-205.8, 512.4], [-194.9, 526.1], [-169, 510.6], [-167.9, 533.9], 
+            [-186, 547.6], [-189.3, 583.9]
+        ] 
+    }
 };
-// 8. FISH
+
+// 8. 물고기
 const fishList = [
     {name:"피라미", bg:"condition/ablette_lieu.png", cond:"condition/ablette_meteo.png", heure:"condition/ablette_heure.png"},
-    {name:"아칸타르쿠스 포모티스", bg:"condition/acantharchus_pomotis_lieu.png", cond:"condition/acantharchus_pomotis_meteo.png", heure:"condition/acantharchus_pomotis_heure.png"},
-    {name:"유럽 뱀장어", bg:"condition/anguille_europeenne_lieu.png", cond:"condition/anguille_europeenne_meteo.png", heure:"condition/anguille_europeenne_heure.png"},
+    {name:"머드 선피쉬", bg:"condition/acantharchus_pomotis_lieu.png", cond:"condition/acantharchus_pomotis_meteo.png", heure:"condition/acantharchus_pomotis_heure.png"},
+    {name:"유럽 장어", bg:"condition/anguille_europeenne_lieu.png", cond:"condition/anguille_europeenne_meteo.png", heure:"condition/anguille_europeenne_heure.png"},
     {name:"아피오세미온", bg:"condition/aphyosemion_striatum_lieu.png", cond:"condition/aphyosemion_striatum_meteo.png", heure:"condition/aphyosemion_striatum_heure.png"},
     {name:"바벨", bg:"condition/barbeau_lieu.png", cond:"condition/barbeau_meteo.png", heure:"condition/barbeau_heure.png"},
     {name:"작은 바벨", bg:"condition/barbillon_lieu.png", cond:"condition/barbillon_meteo.png", heure:"condition/barbillon_heure.png"},
@@ -147,54 +187,54 @@ const fishList = [
     {name:"소라게", bg:"condition/bernard_lhermite_lieu.png", cond:"condition/bernard_lhermite_meteo.png", heure:"condition/bernard_lhermite_heure.png"},
     {name:"강 베도라치", bg:"condition/blennie_de_riviere_lieu.png", cond:"condition/blennie_de_riviere_meteo.png", heure:"condition/blennie_de_riviere_heure.png"},
     {name:"가다랑어", bg:"condition/bonite_lieu.png", cond:"condition/bonite_meteo.png", heure:"condition/bonite_heure.png"},
-    {name:"점박이 파이크", bg:"condition/brochet_tachete_lieu.png", cond:"condition/brochet_tachete_meteo.png", heure:"condition/brochet_tachete_heure.png"},
+    {name:"강꼬치고기", bg:"condition/brochet_tachete_lieu.png", cond:"condition/brochet_tachete_meteo.png", heure:"condition/brochet_tachete_heure.png"},
     {name:"백련어", bg:"condition/carpe_argente_lieu.png", cond:"condition/carpe_argente_meteo.png", heure:"condition/carpe_argente_heure.png"},
     {name:"잉어", bg:"condition/carpe_europeenne_lieu.png", cond:"condition/carpe_europeenne_meteo.png", heure:"condition/carpe_europeenne_heure.png"},
-    {name:"나비 잉어", bg:"condition/carpe_papillon_lieu.png", cond:"condition/carpe_papillon_meteo.png", heure:"condition/carpe_papillon_heure.png"},
+    {name:"나비 비단잉어", bg:"condition/carpe_papillon_lieu.png", cond:"condition/carpe_papillon_meteo.png", heure:"condition/carpe_papillon_heure.png"},
     {name:"검은 잉어", bg:"condition/carpe_noire_lieu.png", cond:"condition/carpe_noire_meteo.png", heure:"condition/carpe_noire_heure.png"},
     {name:"둑중개", bg:"condition/chabot_lieu.png", cond:"condition/chabot_meteo.png", heure:"condition/chabot_heure.png"},
-    {name:"은 키메라", bg:"condition/chimere_argentee_lieu.png", cond:"condition/chimere_argentee_meteo.png", heure:"condition/chimere_argentee_heure.png"},
-    {name:"혜성 금붕어", bg:"condition/comete_coussut_lieu.png", cond:"condition/comete_coussut_meteo.png", heure:"condition/comete_coussut_heure.png"},
-    {name:"참게", bg:"condition/crabe_de_ruisseau_lieu.png", cond:"condition/crabe_de_ruisseau_meteo.png", heure:"condition/crabe_de_ruisseau_heure.png"},
+    {name:"은상어", bg:"condition/chimere_argentee_lieu.png", cond:"condition/chimere_argentee_meteo.png", heure:"condition/chimere_argentee_heure.png"},
+    {name:"코멧 금붕어", bg:"condition/comete_coussut_lieu.png", cond:"condition/comete_coussut_meteo.png", heure:"condition/comete_coussut_heure.png"},
+    {name:"민물게", bg:"condition/crabe_de_ruisseau_lieu.png", cond:"condition/crabe_de_ruisseau_meteo.png", heure:"condition/crabe_de_ruisseau_heure.png"},
     {name:"바다 새우", bg:"condition/crevette_de_la_mer_lieu.png", cond:"condition/crevette_de_la_mer_meteo.png", heure:"condition/crevette_de_la_mer_heure.png"},
     {name:"초록 새우", bg:"condition/crevette_verte_lieu.png", cond:"condition/crevette_verte_meteo.png", heure:"condition/crevette_verte_heure.png"},
-    {name:"귀족 가재", bg:"condition/ecrevisse_noble_lieu.png", cond:"condition/ecrevisse_noble_meteo.png", heure:"condition/ecrevisse_noble_heure.png"},
-    {name:"푸른 귀족 가재", bg:"condition/ecrevisse_noble_bleue_lieu.png", cond:"condition/ecrevisse_noble_bleue_meteo.png", heure:"condition/ecrevisse_noble_bleue_heure.png"},
-    {name:"해덕대구", bg:"condition/eglefin_lieu.png", cond:"condition/eglefin_meteo.png", heure:"condition/eglefin_heure.png"},
+    {name:"가재", bg:"condition/ecrevisse_noble_lieu.png", cond:"condition/ecrevisse_noble_meteo.png", heure:"condition/ecrevisse_noble_heure.png"},
+    {name:"파란 가재", bg:"condition/ecrevisse_noble_bleue_lieu.png", cond:"condition/ecrevisse_noble_bleue_meteo.png", heure:"condition/ecrevisse_noble_bleue_heure.png"},
+    {name:"해덕 대구", bg:"condition/eglefin_lieu.png", cond:"condition/eglefin_meteo.png", heure:"condition/eglefin_heure.png"},
     {name:"빙어", bg:"condition/eperlan_lieu.png", cond:"condition/eperlan_meteo.png", heure:"condition/eperlan_heure.png"},
-    {name:"화이트피시", bg:"condition/fera_lieu.png", cond:"condition/fera_meteo.png", heure:"condition/fera_heure.png"},
-    {name:"큰 입 배스", bg:"condition/grand_blackbasse_lieu.png", cond:"condition/grand_blackbasse_meteo.png", heure:"condition/grand_blackbasse_heure.png"},
+    {name:"송어", bg:"condition/fera_lieu.png", cond:"condition/fera_meteo.png", heure:"condition/fera_heure.png"},
+    {name:"큰입 배스", bg:"condition/grand_blackbasse_lieu.png", cond:"condition/grand_blackbasse_meteo.png", heure:"condition/grand_blackbasse_heure.png"},
     {name:"유럽 개구리", bg:"condition/grenouille_europeenne_lieu.png", cond:"condition/grenouille_europeenne_meteo.png", heure:"condition/grenouille_europeenne_heure.png"},
     {name:"망둑어", bg:"condition/gobie_lieu.png", cond:"condition/gobie_meteo.png", heure:"condition/gobie_heure.png"},
     {name:"성대", bg:"condition/grondin_perlon_lieu.png", cond:"condition/grondin_perlon_meteo.png", heure:"condition/grondin_perlon_heure.png"},
     {name:"해마", bg:"condition/hippocampe_lieu.png", cond:"condition/hippocampe_meteo.png", heure:"condition/hippocampe_heure.png"},
-    {name:"자치", bg:"condition/huchon_lieu.png", cond:"condition/huchon_meteo.png", heure:"condition/huchon_heure.png"},
-    {name:"유럽 닭새우", bg:"condition/langouste_europeenne_lieu.png", cond:"condition/langouste_europeenne_meteo.png", heure:"condition/langouste_europeenne_heure.png"},
-    {name:"꽃 미꾸라지", bg:"condition/loche_des_fleurs_lieu.png", cond:"condition/loche_des_fleurs_meteo.png", heure:"condition/loche_des_fleurs_heure.png"},
-    {name:"돌 미꾸라지", bg:"condition/loche_des_rochers_lieu.png", cond:"condition/loche_des_rochers_meteo.png", heure:"condition/loche_des_rochers_heure.png"},
-    {name:"아귀", bg:"condition/lotte_lieu.png", cond:"condition/lotte_meteo.png", heure:"condition/lotte_heure.png"},
-    {name:"대서양 고등어", bg:"condition/maquereau_atlantique_lieu.png", cond:"condition/maquereau_atlantique_meteo.png", heure:"condition/maquereau_atlantique_heure.png"},
+    {name:"후첸", bg:"condition/huchon_lieu.png", cond:"condition/huchon_meteo.png", heure:"condition/huchon_heure.png"},
+    {name:"유럽 랍스터", bg:"condition/langouste_europeenne_lieu.png", cond:"condition/langouste_europeenne_meteo.png", heure:"condition/langouste_europeenne_heure.png"},
+    {name:"광대 미꾸라지", bg:"condition/loche_des_fleurs_lieu.png", cond:"condition/loche_des_fleurs_meteo.png", heure:"condition/loche_des_fleurs_heure.png"},
+    {name:"바위 미꾸라지", bg:"condition/loche_des_rochers_lieu.png", cond:"condition/loche_des_rochers_meteo.png", heure:"condition/loche_des_rochers_heure.png"},
+    {name:"모장", bg:"condition/lotte_lieu.png", cond:"condition/lotte_meteo.png", heure:"condition/lotte_heure.png"},
+    {name:"고등어", bg:"condition/maquereau_atlantique_lieu.png", cond:"condition/maquereau_atlantique_meteo.png", heure:"condition/maquereau_atlantique_heure.png"},
     {name:"홍합", bg:"condition/moule_lieu.png", cond:"condition/moule_meteo.png", heure:"condition/moule_heure.png"},
     {name:"북극 곤들매기", bg:"condition/omble_chevalier_lieu.png", cond:"condition/omble_chevalier_meteo.png", heure:"condition/omble_chevalier_heure.png"},
     {name:"민어", bg:"condition/ombrine_lieu.png", cond:"condition/ombrine_meteo.png", heure:"condition/ombrine_heure.png"},
-    {name:"흑점 도미", bg:"condition/pagellus_bogaraveo_lieu.png", cond:"condition/pagellus_bogaraveo_meteo.png", heure:"condition/pagellus_bogaraveo_heure.png"},
+    {name:"돔", bg:"condition/pagellus_bogaraveo_lieu.png", cond:"condition/pagellus_bogaraveo_meteo.png", heure:"condition/pagellus_bogaraveo_heure.png"},
     {name:"농어", bg:"condition/perche_de_mer_lieu.png", cond:"condition/perche_de_mer_meteo.png", heure:"condition/perche_de_mer_heure.png"},
-    {name:"자두 농어", bg:"condition/perche_de_prunier_lieu.png", cond:"condition/perche_de_prunier_meteo.png", heure:"condition/perche_de_prunier_heure.png"},
+    {name:"러프", bg:"condition/perche_de_prunier_lieu.png", cond:"condition/perche_de_prunier_meteo.png", heure:"condition/perche_de_prunier_heure.png"},
     {name:"강 농어", bg:"condition/perche_de_riviere_lieu.png", cond:"condition/perche_de_riviere_meteo.png", heure:"condition/perche_de_riviere_heure.png"},
     {name:"문어", bg:"condition/pieuvre_lieu.png", cond:"condition/pieuvre_meteo.png", heure:"condition/pieuvre_heure.png"},
-    {name:"쭈꾸미", bg:"condition/pieuvre_naine_atlantique_lieu.png", cond:"condition/pieuvre_naine_atlantique_meteo.png", heure:"condition/pieuvre_naine_atlantique_heure.png"},
-    {name:"타이거피시", bg:"condition/poissontigre_a_ventre_rouge_lieu.png", cond:"condition/poissontigre_a_ventre_rouge_meteo.png", heure:"condition/poissontigre_a_ventre_rouge_heure.png"},
-    {name:"유럽 가자미", bg:"condition/plie_europeenne_lieu.png", cond:"condition/plie_europeenne_meteo.png", heure:"condition/plie_europeenne_heure.png"},
+    {name:"피그미 문어", bg:"condition/pieuvre_naine_atlantique_lieu.png", cond:"condition/pieuvre_naine_atlantique_meteo.png", heure:"condition/pieuvre_naine_atlantique_heure.png"},
+    {name:"타이거피쉬", bg:"condition/poissontigre_a_ventre_rouge_lieu.png", cond:"condition/poissontigre_a_ventre_rouge_meteo.png", heure:"condition/poissontigre_a_ventre_rouge_heure.png"},
+    {name:"가자미", bg:"condition/plie_europeenne_lieu.png", cond:"condition/plie_europeenne_meteo.png", heure:"condition/plie_europeenne_heure.png"},
     {name:"흰동가리", bg:"condition/poissonclown_lieu.png", cond:"condition/poissonclown_meteo.png", heure:"condition/poissonclown_heure.png"},
     {name:"가시고기", bg:"condition/poisson_epineux_lieu.png", cond:"condition/poisson_epineux_meteo.png", heure:"condition/poisson_epineux_heure.png"},
-    {name:"강 복어", bg:"condition/poissonglobe_de_riviere_lieu.png", cond:"condition/poissonglobe_de_riviere_meteo.png", heure:"condition/poissonglobe_de_riviere_heure.png"},
+    {name:"복어", bg:"condition/poissonglobe_de_riviere_lieu.png", cond:"condition/poissonglobe_de_riviere_meteo.png", heure:"condition/poissonglobe_de_riviere_heure.png"},
     {name:"금붕어", bg:"condition/poisson_rouge_lieu.png", cond:"condition/poisson_rouge_meteo.png", heure:"condition/poisson_rouge_heure.png"},
     {name:"갈치", bg:"condition/poisson_ruban_lieu.png", cond:"condition/poisson_ruban_meteo.png", heure:"condition/poisson_ruban_heure.png"},
-    {name:"붉은 눈 물고기", bg:"condition/poisson_a_yeux_rouges_lieu.png", cond:"condition/poisson_a_yeux_rouges_meteo.png", heure:"condition/poisson_a_yeux_rouges_heure.png"},
+    {name:"로치", bg:"condition/poisson_a_yeux_rouges_lieu.png", cond:"condition/poisson_a_yeux_rouges_meteo.png", heure:"condition/poisson_a_yeux_rouges_heure.png"},
     {name:"산갈치", bg:"condition/regalec_lieu.png", cond:"condition/regalec_meteo.png", heure:"condition/regalec_heure.png"},
     {name:"노랑촉수", bg:"condition/rouget_barbet_lieu.png", cond:"condition/rouget_barbet_meteo.png", heure:"condition/rouget_barbet_heure.png"},
-    {name:"곱상어", bg:"condition/roussette_lieu.png", cond:"condition/roussette_meteo.png", heure:"condition/roussette_heure.png"},
-    {name:"백색 샌더", bg:"condition/sandre_blanc_lieu.png", cond:"condition/sandre_blanc_meteo.png", heure:"condition/sandre_blanc_heure.png"},
+    {name:"두툽상어", bg:"condition/roussette_lieu.png", cond:"condition/roussette_meteo.png", heure:"condition/roussette_heure.png"},
+    {name:"백쏘가리", bg:"condition/sandre_blanc_lieu.png", cond:"condition/sandre_blanc_meteo.png", heure:"condition/sandre_blanc_heure.png"},
     {name:"대서양 연어", bg:"condition/saumon_atlantique_lieu.png", cond:"condition/saumon_atlantique_meteo.png", heure:"condition/saumon_atlantique_heure.png"},
     {name:"연어", bg:"condition/saumon_keta_lieu.png", cond:"condition/saumon_keta_meteo.png", heure:"condition/saumon_keta_heure.png"},
     {name:"전갱이", bg:"condition/saurel_lieu.png", cond:"condition/saurel_meteo.png", heure:"condition/saurel_heure.png"},
@@ -204,83 +244,99 @@ const fishList = [
     {name:"황금 텐치", bg:"condition/tanche_doree_lieu.png", cond:"condition/tanche_doree_meteo.png", heure:"condition/tanche_doree_heure.png"},
     {name:"올챙이", bg:"condition/tetard_lieu.png", cond:"condition/tetard_meteo.png", heure:"condition/tetard_heure.png"},
     {name:"틸라피아", bg:"condition/tilapia_lieu.png", cond:"condition/tilapia_meteo.png", heure:"condition/tilapia_heure.png"},
-    {name:"넙치", bg:"condition/turbot_lieu.png", cond:"condition/turbot_meteo.png", heure:"condition/turbot_heure.png"},
-    {name:"피라미", bg:"condition/vairon_lieu.png", cond:"condition/vairon_meteo.png", heure:"condition/vairon_heure.png"},
-    {name:"징겔 스트레버", bg:"condition/zingel_streber_lieu.png", cond:"condition/zingel_streber_meteo.png", heure:"condition/zingel_streber_heure.png"}
+    {name:"대문짝넙치", bg:"condition/turbot_lieu.png", cond:"condition/turbot_meteo.png", heure:"condition/turbot_heure.png"},
+    {name:"피라미 (Minnow)", bg:"condition/vairon_lieu.png", cond:"condition/vairon_meteo.png", heure:"condition/vairon_heure.png"},
+    {name:"징엘", bg:"condition/zingel_streber_lieu.png", cond:"condition/zingel_streber_meteo.png", heure:"condition/zingel_streber_heure.png"}
 ];
 
-// 9. BUGS
+// 9. 곤충
 const bugList = [
+    {name:"흰꼬리 호박벌", bg:"condition/abeille_a_queue_blanche_lieu.png", cond:"condition/abeille_a_queue_blanche_meteo.png", heure:"condition/abeille_a_queue_blanche_heure.png"},
+    {name:"파란 목수벌", bg:"condition/Abeille_charpentière_bleue_lieu.png", cond:"condition/Abeille_charpentière_bleue_meteo.png", heure:"condition/Abeille_charpentière_bleue_heure.png"},
+    {name:"보라색 목수벌", bg:"condition/abeille_charpentiere_violette_lieu.png", cond:"condition/abeille_charpentiere_violette_meteo.png", heure:"condition/abeille_charpentiere_violette_heure.png"},
     {name:"긴꼬리산누에나방", bg:"condition/actias_neidhoederi_lieu.png", cond:"condition/actias_neidhoederi_meteo.png", heure:"condition/actias_neidhoederi_heure.png"},
     {name:"푸른 부전나비", bg:"condition/azure_de_porcelaine_lieu.png", cond:"condition/azure_de_porcelaine_meteo.png", heure:"condition/azure_de_porcelaine_heure.png"},
     {name:"호박벌", bg:"condition/bourdon_lieu.png", cond:"condition/bourdon_meteo.png", heure:"condition/bourdon_heure.png"},
-    {name:"파란 별 꽃무지", bg:"condition/cetoine_etoilee_bleue_lieu.png", cond:"condition/cetoine_etoilee_bleue_meteo.png", heure:"condition/cetoine_etoilee_bleue_heure.png"},
+    {name:"호랑이 하늘소", bg:"condition/capricorne_tigre_lieu.jpg", cond:"condition/capricorne_tigre_meteo.png", heure:"condition/capricorne_tigre_heure.png"},
+    {name:"파란 꽃무지", bg:"condition/cetoine_etoilee_bleue_lieu.png", cond:"condition/cetoine_etoilee_bleue_meteo.png", heure:"condition/cetoine_etoilee_bleue_heure.png"},
     {name:"길앞잡이", bg:"condition/cicindele_verte_lieu.png", cond:"condition/cicindele_verte_meteo.png", heure:"condition/cicindele_verte_heure.png"},
+    {name:"매미", bg:"condition/cigale_lieu.png", cond:"condition/cigale_meteo.png", heure:"condition/cigale_heure.png"},
     {name:"갈고리 나비", bg:"condition/citron_aspasia_lieu.png", cond:"condition/citron_aspasia_meteo.png", heure:"condition/citron_aspasia_heure.png"},
     {name:"칠성무당벌레", bg:"condition/coccinelle_a_sept_points_lieu.png", cond:"condition/coccinelle_a_sept_points_meteo.png", heure:"condition/coccinelle_a_sept_points_heure.png"},
-    {name:"무당벌레", bg:"condition/coccinelle_asiatique_lieu.png", cond:"condition/coccinelle_asiatique_meteo.png", heure:"condition/coccinelle_asiatique_heure.png"},
-    {name:"아스파라거스 잎벌레", bg:"condition/criocere_de_lasperge_lieu.png", cond:"condition/criocere_de_lasperge_meteo.png", heure:"condition/criocere_de_lasperge_heure.png"},
-    {name:"큰 다리 메뚜기", bg:"condition/criquet_aux_pattes_massives_lieu.png", cond:"condition/criquet_aux_pattes_massives_meteo.png", heure:"condition/criquet_aux_pattes_massives_heure.png"},
+    {name:"아시아 무당벌레", bg:"condition/coccinelle_asiatique_lieu.png", cond:"condition/coccinelle_asiatique_meteo.png", heure:"condition/coccinelle_asiatique_heure.png"},
+    {name:"아스파라거스 딱정벌레", bg:"condition/criocere_de_lasperge_lieu.png", cond:"condition/criocere_de_lasperge_meteo.png", heure:"condition/criocere_de_lasperge_heure.png"},
+    {name:"그물날개 메뚜기", bg:"condition/criquet_a_ailes_reticulees_lieu.png", cond:"condition/criquet_a_ailes_reticulees_meteo.png", heure:"condition/criquet_a_ailes_reticulees_heure.png"},
+    {name:"왕다리 메뚜기", bg:"condition/criquet_aux_pattes_massives_lieu.png", cond:"condition/criquet_aux_pattes_massives_meteo.png", heure:"condition/criquet_aux_pattes_massives_heure.png"},
+    {name:"개미", bg:"condition/fourmi_lieu.png", cond:"condition/fourmi_meteo.png", heure:"condition/fourmi_heure.png"},
     {name:"실잠자리", bg:"condition/grand_agrion_lieu.png", cond:"condition/grand_agrion_meteo.png", heure:"condition/grand_agrion_heure.png"},
+    {name:"귀뚜라미", bg:"condition/grillon_lieu.jpg", cond:"condition/grillon_meteo.png", heure:"condition/grillon_heure.png"},
+    {name:"밀잠자리", bg:"condition/libellule_a_queue_blanche_lieu.png", cond:"condition/libellule_a_queue_blanche_meteo.png", heure:"condition/libellule_a_queue_blanche_heure.png"},
     {name:"점박이 잠자리", bg:"condition/libellule_tachetee_lieu.png", cond:"condition/libellule_tachetee_meteo.png", heure:"condition/libellule_tachetee_heure.png"},
+    {name:"무지개 사마귀", bg:"condition/mante_arcenciel_lieu.png", cond:"condition/mante_arcenciel_meteo.png", heure:"condition/mante_arcenciel_heure.png"},
+    {name:"파푸아 사마귀", bg:"condition/mante_papoue_lieu.png", cond:"condition/mante_papoue_meteo.png", heure:"condition/mante_papoue_heure.png"},
+    {name:"표범 나비", bg:"condition/melitee_leopard_lieu.png", cond:"condition/melitee_leopard_meteo.png", heure:"condition/melitee_leopard_heure.png"},
+    {name:"공작 나비", bg:"condition/paondujour_lieu.png", cond:"condition/paondujour_meteo.png", heure:"condition/paondujour_heure.png"},
     {name:"붉은 고리 나비", bg:"condition/papillon_a_anneaux_rouges_lieu.png", cond:"condition/papillon_a_anneaux_rouges_meteo.png", heure:"condition/papillon_a_anneaux_rouges_heure.png"},
     {name:"붉은 목 나비", bg:"condition/papillon_a_col_rouge_lieu.png", cond:"condition/papillon_a_col_rouge_meteo.png", heure:"condition/papillon_a_col_rouge_heure.png"},
-    {name:"배추흰나비", bg:"condition/papillon_blanc_lieu.png", cond:"condition/papillon_blanc_meteo.png", heure:"condition/papillon_blanc_heure.png"},
+    {name:"흰 나비", bg:"condition/papillon_blanc_lieu.png", cond:"condition/papillon_blanc_meteo.png", heure:"condition/papillon_blanc_heure.png"},
     {name:"황금 나비", bg:"condition/papillon_dore_lieu.png", cond:"condition/papillon_dore_meteo.png", heure:"condition/papillon_dore_heure.png"},
+    {name:"흰 마녀 나방", bg:"condition/Papillon_sorcière_blanche_lieu.png", cond:"condition/Papillon_sorcière_blanche_meteo.png", heure:"condition/Papillon_sorcière_blanche_heure.png"},
     {name:"모시나비", bg:"condition/parnassien_lieu.png", cond:"condition/parnassien_meteo.png", heure:"condition/parnassien_heure.png"},
-    {name:"줄흰나비", bg:"condition/pieride_du_cresson_lieu.png", cond:"condition/pieride_du_cresson_meteo.png", heure:"condition/pieride_du_cresson_heure.png"},
+    {name:"큰흰나비", bg:"condition/pieride_du_cresson_lieu.png", cond:"condition/pieride_du_cresson_meteo.png", heure:"condition/pieride_du_cresson_heure.png"},
     {name:"피카소 벌레", bg:"condition/punaise_picasso_lieu.png", cond:"condition/punaise_picasso_meteo.png", heure:"condition/punaise_picasso_heure.png"},
-    {name:"붉은 날개 딱정벌레", bg:"condition/pyrochroa_lieu.png", cond:"condition/pyrochroa_meteo.png", heure:"condition/pyrochroa_heure.png"},
-    {name:"붉은 별 노린재", bg:"condition/pyrrhocoris_apterus_lieu.png", cond:"condition/pyrrhocoris_apterus_meteo.png", heure:"condition/pyrrhocoris_apterus_heure.png"},
+    {name:"홍날개", bg:"condition/pyrochroa_lieu.png", cond:"condition/pyrochroa_meteo.png", heure:"condition/pyrochroa_heure.png"},
+    {name:"별노린재", bg:"condition/pyrrhocoris_apterus_lieu.png", cond:"condition/pyrrhocoris_apterus_meteo.png", heure:"condition/pyrrhocoris_apterus_heure.png"},
     {name:"오아시스 메뚜기", bg:"condition/sauterelle_de_loasis_lieu.png", cond:"condition/sauterelle_de_loasis_meteo.png", heure:"condition/sauterelle_de_loasis_heure.png"},
-    {name:"장수풍뎅이", bg:"condition/scarabee_unicorne_lieu.png", cond:"condition/scarabee_unicorne_meteo.png", heure:"condition/scarabee_unicorne_heure.png"}
+    {name:"분홍 여치", bg:"condition/sauterelle_rose_lieu.jpg", cond:"condition/sauterelle_rose_meteo.png", heure:"condition/sauterelle_rose_heure.png"},
+    {name:"유니콘 장수풍뎅이", bg:"condition/scarabee_unicorne_lieu.png", cond:"condition/scarabee_unicorne_meteo.png", heure:"condition/scarabee_unicorne_heure.png"},
+    {name:"보라색 대장 나비", bg:"condition/Vanesse_violette_lieu.png", cond:"condition/Vanesse_violette_meteo.png", heure:"condition/Vanesse_violette_heure.png"}
 ];
 
-// 10. BIRDS
+// 10. 새
 const birdList = [
-    {name:"청금강앵무", bg:"condition/ara_bleu_et_jaune_lieu.png", cond:"condition/ara_bleu_et_jaune_meteo.png", heure:"condition/ara_bleu_et_jaune_heure.png"},
-    {name:"홍금강앵무", bg:"condition/ara_rouge_et_vert_lieu.png", cond:"condition/ara_rouge_et_vert_meteo.png", heure:"condition/ara_rouge_et_vert_heure.png"},
-    {name:"인디고 마코", bg:"condition/ara_indigo_lieu.png", cond:"condition/ara_indigo_meteo.png", heure:"condition/ara_indigo_heure.png"},
+    {name:"청황 마코앵무", bg:"condition/ara_bleu_et_jaune_lieu.png", cond:"condition/ara_bleu_et_jaune_meteo.png", heure:"condition/ara_bleu_et_jaune_heure.png"},
+    {name:"홍록 마코앵무", bg:"condition/ara_rouge_et_vert_lieu.png", cond:"condition/ara_rouge_et_vert_meteo.png", heure:"condition/ara_rouge_et_vert_heure.png"},
+    {name:"인디고 마코앵무", bg:"condition/ara_indigo_lieu.png", cond:"condition/ara_indigo_meteo.png", heure:"condition/ara_indigo_heure.png"},
     {name:"알락할미새", bg:"condition/bergeronnette_grise_lieu.png", cond:"condition/bergeronnette_grise_meteo.png", heure:"condition/bergeronnette_grise_heure.png"},
     {name:"멋쟁이새", bg:"condition/bouvreuil_lieu.png", cond:"condition/bouvreuil_meteo.png", heure:"condition/bouvreuil_heure.png"},
-    {name:"붉은 배 멋쟁이새", bg:"condition/bouvreuil_a_ventre_rouge_lieu.png", cond:"condition/bouvreuil_a_ventre_rouge_meteo.png", heure:"condition/bouvreuil_a_ventre_rouge_heure.png"},
+    {name:"붉은배 멋쟁이새", bg:"condition/bouvreuil_a_ventre_rouge_lieu.png", cond:"condition/bouvreuil_a_ventre_rouge_meteo.png", heure:"condition/bouvreuil_a_ventre_rouge_heure.png"},
     {name:"일곱빛깔 풍금조", bg:"condition/calliste_septicolore_lieu.png", cond:"condition/calliste_septicolore_meteo.png", heure:"condition/calliste_septicolore_heure.png"},
-    {name:"흰머리오리", bg:"condition/canard_a_tete_blanche_lieu.png", cond:"condition/canard_a_tete_blanche_meteo.png", heure:"condition/canard_a_tete_blanche_heure.png"},
+    {name:"흰머리 오리", bg:"condition/canard_a_tete_blanche_lieu.png", cond:"condition/canard_a_tete_blanche_meteo.png", heure:"condition/canard_a_tete_blanche_heure.png"},
     {name:"청둥오리", bg:"condition/canard_colvert_lieu.png", cond:"condition/canard_colvert_meteo.png", heure:"condition/canard_colvert_heure.png"},
     {name:"홍머리오리", bg:"condition/canard_siffleur_lieu.png", cond:"condition/canard_siffleur_meteo.png", heure:"condition/canard_siffleur_heure.png"},
-    {name:"회색 관 홍관조", bg:"condition/cardinal_a_couronne_grisecolombar_a_cou_rose_lieu.png", cond:"condition/cardinal_a_couronne_grisecolombar_a_cou_rose_meteo.png", heure:"condition/cardinal_a_couronne_grisecolombar_a_cou_rose_heure.png"},
+    {name:"홍관조", bg:"condition/cardinal_a_couronne_grisecolombar_a_cou_rose_lieu.png", cond:"condition/cardinal_a_couronne_grisecolombar_a_cou_rose_meteo.png", heure:"condition/cardinal_a_couronne_grisecolombar_a_cou_rose_heure.png"},
     {name:"잠부 과일 비둘기", bg:"condition/colombe_jambu_lieu.png", cond:"condition/colombe_jambu_meteo.png", heure:"condition/colombe_jambu_heure.png"},
     {name:"금화조", bg:"condition/diamant_mandarin_lieu.png", cond:"condition/diamant_mandarin_meteo.png", heure:"condition/diamant_mandarin_heure.png"},
-    {name:"왕솜털오리", bg:"condition/eider_royal_lieu.png", cond:"condition/eider_royal_meteo.png", heure:"condition/eider_royal_heure.png"},
-    {name:"백복 꿩", bg:"condition/faisan_a_ventre_blanc_lieu.png", cond:"condition/faisan_a_ventre_blanc_meteo.png", heure:"condition/faisan_a_ventre_blanc_heure.png"},
-    {name:"비둘기조롱이", bg:"condition/faucon_a_pattes_rouges_lieu.png", cond:"condition/faucon_a_pattes_rouges_meteo.png", heure:"condition/faucon_a_pattes_rouges_heure.png"},
+    {name:"킹 아이더", bg:"condition/eider_royal_lieu.png", cond:"condition/eider_royal_meteo.png", heure:"condition/eider_royal_heure.png"},
+    {name:"백복 금계", bg:"condition/faisan_a_ventre_blanc_lieu.png", cond:"condition/faisan_a_ventre_blanc_meteo.png", heure:"condition/faisan_a_ventre_blanc_heure.png"},
+    {name:"비둘기 조롱이", bg:"condition/faucon_a_pattes_rouges_lieu.png", cond:"condition/faucon_a_pattes_rouges_meteo.png", heure:"condition/faucon_a_pattes_rouges_heure.png"},
     {name:"매", bg:"condition/faucon_pelerin_lieu.png", cond:"condition/faucon_pelerin_meteo.png", heure:"condition/faucon_pelerin_heure.png"},
-    {name:"붉은 매", bg:"condition/faucon_rouge_lieu.png", cond:"condition/faucon_rouge_meteo.png", heure:"condition/faucon_rouge_heure.png"},
-    {name:"미국 플라밍고", bg:"condition/flamant_rose_americain_lieu.png", cond:"condition/flamant_rose_americain_meteo.png", heure:"condition/flamant_rose_americain_heure.png"},
+    {name:"황조롱이", bg:"condition/faucon_rouge_lieu.png", cond:"condition/faucon_rouge_meteo.png", heure:"condition/faucon_rouge_heure.png"},
+    {name:"아메리카 홍학", bg:"condition/flamant_rose_americain_lieu.png", cond:"condition/flamant_rose_americain_meteo.png", heure:"condition/flamant_rose_americain_heure.png"},
     {name:"되새", bg:"condition/fringilla_coelebs_lieu.png", cond:"condition/fringilla_coelebs_meteo.png", heure:"condition/fringilla_coelebs_heure.png"},
     {name:"로쿠쇼 히타키", bg:"condition/gobemouche_vertdegris_lieu.png", cond:"condition/gobemouche_vertdegris_meteo.png", heure:"condition/gobemouche_vertdegris_heure.png"},
     {name:"갈매기", bg:"condition/goeland_lieu.png", cond:"condition/goeland_meteo.png", heure:"condition/goeland_heure.png"},
     {name:"꾀꼬리", bg:"condition/golden_oriole_lieu.png", cond:"condition/golden_oriole_meteo.png", heure:"condition/golden_oriole_heure.png"},
     {name:"수리부엉이", bg:"condition/grand_duc_deurope_lieu.png", cond:"condition/grand_duc_deurope_meteo.png", heure:"condition/grand_duc_deurope_heure.png"},
-    {name:"큰 플라밍고", bg:"condition/grand_flamant_lieu.png", cond:"condition/grand_flamant_meteo.png", heure:"condition/grand_flamant_heure.png"},
-    {name:"오색딱따구리", bg:"condition/grand_pic_lieu.png", cond:"condition/grand_pic_meteo.png", heure:"condition/grand_pic_heure.png"},
+    {name:"큰 홍학", bg:"condition/grand_flamant_lieu.png", cond:"condition/grand_flamant_meteo.png", heure:"condition/grand_flamant_heure.png"},
+    {name:"까막딱따구리", bg:"condition/grand_pic_lieu.png", cond:"condition/grand_pic_meteo.png", heure:"condition/grand_pic_heure.png"},
     {name:"콩새", bg:"condition/grosbec_lieu.png", cond:"condition/grosbec_meteo.png", heure:"condition/grosbec_heure.png"},
     {name:"유럽 벌잡이새", bg:"condition/guepier_deurope_lieu.png", cond:"condition/guepier_deurope_meteo.png", heure:"condition/guepier_deurope_heure.png"},
-    {name:"흰비오리", bg:"condition/harle_piette_lieu.png", cond:"condition/harle_piette_meteo.png", heure:"condition/harle_piette_heure.png"},
-    {name:"칡부엉이", bg:"condition/hibou_moyen_duc_lieu.png", cond:"condition/hibou_moyen_duc_meteo.png", heure:"condition/hibou_moyen_duc_heure.png"},
-    {name:"황금 바우어새", bg:"condition/jardinier_a_tete_jaune_lieu.png", cond:"condition/jardinier_a_tete_jaune_meteo.png", heure:"condition/jardinier_a_tete_jaune_heure.png"},
-    {name:"흰등 홍방울새", bg:"condition/linotte_a_dos_blanc_lieu.png", cond:"condition/linotte_a_dos_blanc_meteo.png", heure:"condition/linotte_a_dos_blanc_heure.png"},
+    {name:"흰 비오리", bg:"condition/harle_piette_lieu.png", cond:"condition/harle_piette_meteo.png", heure:"condition/harle_piette_heure.png"},
+    {name:"칙때까치", bg:"condition/hibou_moyen_duc_lieu.png", cond:"condition/hibou_moyen_duc_meteo.png", heure:"condition/hibou_moyen_duc_heure.png"},
+    {name:"노란 머리 바우어새", bg:"condition/jardinier_a_tete_jaune_lieu.png", cond:"condition/jardinier_a_tete_jaune_meteo.png", heure:"condition/jardinier_a_tete_jaune_heure.png"},
+    {name:"흰 엉덩이 시드이터", bg:"condition/linotte_a_dos_blanc_lieu.png", cond:"condition/linotte_a_dos_blanc_meteo.png", heure:"condition/linotte_a_dos_blanc_heure.png"},
     {name:"동부 파랑새", bg:"condition/merle_bleu_de_lest_lieu.png", cond:"condition/merle_bleu_de_lest_meteo.png", heure:"condition/merle_bleu_de_lest_heure.png"},
-    {name:"은색 목 오목눈이", bg:"condition/mesange_a_menton_argent_lieu.png", cond:"condition/mesange_a_menton_argent_meteo.png", heure:"condition/mesange_a_menton_argent_heure.png"},
+    {name:"오목눈이", bg:"condition/mesange_a_menton_argent_lieu.png", cond:"condition/mesange_a_menton_argent_meteo.png", heure:"condition/mesange_a_menton_argent_heure.png"},
     {name:"푸른 박새", bg:"condition/mesange_bleue_lieu.png", cond:"condition/mesange_bleue_meteo.png", heure:"condition/mesange_bleue_heure.png"},
     {name:"노란 배 딱새", bg:"condition/moucherolle_a_ventre_jaune_lieu.png", cond:"condition/moucherolle_a_ventre_jaune_meteo.png", heure:"condition/moucherolle_a_ventre_jaune_heure.png"},
     {name:"붉은 부리 갈매기", bg:"condition/mouette_lieu.png", cond:"condition/mouette_meteo.png", heure:"condition/mouette_heure.png"},
     {name:"수염 오목눈이", bg:"condition/panure_a_moustache_lieu.png", cond:"condition/panure_a_moustache_meteo.png", heure:"condition/panure_a_moustache_heure.png"},
     {name:"백공작", bg:"condition/paon_blanc_lieu.png", cond:"condition/paon_blanc_meteo.png", heure:"condition/paon_blanc_heure.png"},
-    {name:"청공작", bg:"condition/paon_bleu_lieu.png", cond:"condition/paon_bleu_meteo.png", heure:"condition/paon_bleu_heure.png"},
-    {name:"흑공작", bg:"condition/paon_noir_lieu.png", cond:"condition/paon_noir_meteo.png", heure:"condition/paon_noir_heure.png"},
-    {name:"진주공작", bg:"condition/paon_vert_lieu.png", cond:"condition/paon_vert_meteo.png", heure:"condition/paon_vert_heure.png"},
-    {name:"꼬마 플라밍고", bg:"condition/petit_flamant_lieu.png", cond:"condition/petit_flamant_meteo.png", heure:"condition/petit_flamant_heure.png"},
+    {name:"인도 공작", bg:"condition/paon_bleu_lieu.png", cond:"condition/paon_bleu_meteo.png", heure:"condition/paon_bleu_heure.png"},
+    {name:"검은 공작", bg:"condition/paon_noir_lieu.png", cond:"condition/paon_noir_meteo.png", heure:"condition/paon_noir_heure.png"},
+    {name:"녹색 공작", bg:"condition/paon_vert_lieu.png", cond:"condition/paon_vert_meteo.png", heure:"condition/paon_vert_heure.png"},
+    {name:"꼬마 홍학", bg:"condition/petit_flamant_lieu.png", cond:"condition/petit_flamant_meteo.png", heure:"condition/petit_flamant_heure.png"},
     {name:"우드챗 때까치", bg:"condition/piegrieche_a_tete_rousse_lieu.png", cond:"condition/piegrieche_a_tete_rousse_meteo.png", heure:"condition/piegrieche_a_tete_rousse_heure.png"},
     {name:"황금 과일 비둘기", bg:"condition/pigeon_aux_fruits_dor_lieu.png", cond:"condition/pigeon_aux_fruits_dor_meteo.png", heure:"condition/pigeon_aux_fruits_dor_heure.png"},
     {name:"노란 눈 비둘기", bg:"condition/pigeon_aux_yeux_jaunes_lieu.png", cond:"condition/pigeon_aux_yeux_jaunes_meteo.png", heure:"condition/pigeon_aux_yeux_jaunes_heure.png"},
@@ -288,47 +344,47 @@ const birdList = [
     {name:"웡가 비둘기", bg:"condition/pigeon_de_wonga_lieu.png", cond:"condition/pigeon_de_wonga_meteo.png", heure:"condition/pigeon_de_wonga_heure.png"},
     {name:"분홍 비둘기", bg:"condition/pigeon_rose_lieu.png", cond:"condition/pigeon_rose_meteo.png", heure:"condition/pigeon_rose_heure.png"},
     {name:"핀치", bg:"condition/pinson_lieu.png", cond:"condition/pinson_meteo.png", heure:"condition/pinson_heure.png"},
-    {name:"울새", bg:"condition/rougegorge_lieu.png", cond:"condition/rougegorge_meteo.png", heure:"condition/rougegorge_heure.png"},
+    {name:"유럽 울새", bg:"condition/rougegorge_lieu.png", cond:"condition/rougegorge_meteo.png", heure:"condition/rougegorge_heure.png"},
     {name:"동고비", bg:"condition/sittelle_lieu.png", cond:"condition/sittelle_meteo.png", heure:"condition/sittelle_heure.png"},
     {name:"제비갈매기", bg:"condition/sterne_lieu.png", cond:"condition/sterne_meteo.png", heure:"condition/sterne_heure.png"},
     {name:"흰 제비갈매기", bg:"condition/sterne_blanche_lieu.png", cond:"condition/sterne_blanche_meteo.png", heure:"condition/sterne_blanche_heure.png"},
     {name:"황오리", bg:"condition/tadorne_casarca_lieu.png", cond:"condition/tadorne_casarca_meteo.png", heure:"condition/tadorne_casarca_heure.png"},
     {name:"회색 머리 비둘기", bg:"condition/tourterelle_a_tete_grise_lieu.png", cond:"condition/tourterelle_a_tete_grise_meteo.png", heure:"condition/tourterelle_a_tete_grise_heure.png"},
-    {name:"염주비둘기", bg:"condition/tourterelle_grise_lieu.png", cond:"condition/tourterelle_grise_meteo.png", heure:"condition/tourterelle_grise_heure.png"},
+    {name:"염주 비둘기", bg:"condition/tourterelle_grise_lieu.png", cond:"condition/tourterelle_grise_meteo.png", heure:"condition/tourterelle_grise_heure.png"},
     {name:"목점박이 비둘기", bg:"condition/tourterelle_tigrine_lieu.png", cond:"condition/tourterelle_tigrine_meteo.png", heure:"condition/tourterelle_tigrine_heure.png"},
     {name:"굴뚝새", bg:"condition/troglodyte_lieu.png", cond:"condition/troglodyte_meteo.png", heure:"condition/troglodyte_heure.png"}
 ];
 
-// 11. QUIZ
+// 11. 퀴즈
 const QUIZ_DATA = [
-    { q: "마을 가이드는 누구인가요?", o: ["Albert Jr.", "Barnabé", "Eric"], a: 0 },
-    { q: "아칸타르쿠스 포모티스는 어디서 찾을 수 있나요?", o: ["고요한 바다", "숲 호수", "오로라 강"], a: 0 },
-    { q: "누가 수집품을 관리하나요?", o: ["수집가", "Bob", "Massimo"], a: 0 },
-    { q: "무지개가 뜨는 날씨는?", o: ["폭풍", "안개", "비 온 뒤 맑음"], a: 2 },
-    { q: "어촌은 어디에 있나요?", o: ["북동쪽", "남서쪽", "동쪽"], a: 1 },
-    { q: "긴꼬리산누에나방은 언제 나타나요?", o: ["아침", "낮", "밤"], a: 2 },
-    { q: "카피바라는 어디에 사나요?", o: ["유적지", "다이빙 대", "해변"], a: 0 },
-    { q: "누가 개를 파나요?", o: ["Vernie", "Joan", "Andrew"], a: 1 },
-    { q: "산갈치는 어디서 잡나요?", o: ["강", "호수", "바다"], a: 2 },
-    { q: "온천 지역은 어디인가요?", o: ["북쪽", "남쪽", "서쪽"], a: 0 },
-    { q: "장수풍뎅이는 어디에 사나요?", o: ["동양 부두", "들판", "숲"], a: 0 },
-    { q: "인디고 마코는 무엇인가요?", o: ["물고기", "곤충", "새"], a: 2 },
-    { q: "나비 잉어는 어디에 사나요?", o: ["민물", "바닷물", "초원 호수"], a: 2 },
-    { q: "윌은 어디에 있나요?", o: ["바다 근처", "산 속", "숲 속"], a: 0 },
-    { q: "물고기 버튼 색깔은?", o: ["초록색", "파란색", "주황색"], a: 1 },
-    { q: "호박벌은 어디에 사나요?", o: ["호수", "꽃밭", "동굴"], a: 1 },
-    { q: "수달은 어디에 있나요?", o: ["등대", "어촌", "유적지"], a: 1 },
-    { q: "판다는 어디 근처에 사나요?", o: ["다이빙 대", "마을", "부두"], a: 0 },
-    { q: "빙어는 어디에 사나요?", o: ["초원 호수", "상류 호수", "바다"], a: 0 },
-    { q: "Annie는 어디에 있나요?", o: ["중앙 광장", "해변", "숲"], a: 0 },
-    { q: "라마는 어디에 사나요?", o: ["보라색 해변", "산", "강"], a: 0 },
-    { q: "지도의 점수는?", o: ["5", "0", "20"], a: 2 },
-    { q: "푸른 가재는 어디에 사나요?", o: ["숲 호수", "바다", "고요한 바다"], a: 0 },
-    { q: "고래 산은 어느 쪽에 있나요?", o: ["남쪽", "북쪽", "서쪽"], a: 2 },
-    { q: "맵토피아의 용도는?", o: ["아이템 판매", "자원 찾기", "게임 대체"], a: 1 },
-    { q: "알락할미새는 무엇인가요?", o: ["새", "물고기", "주민"], a: 1 },
-    { q: "사슴은 어디에 사나요?", o: ["해변", "오크 숲", "마을"], a: 1 },
-    { q: "갈고리 나비는 무엇인가요?", o: ["과일", "곤충", "물고기"], a: 1 },
-    { q: "동양 부두는 어느 쪽에 있나요?", o: ["북쪽", "동쪽", "남쪽"], a: 1 },
-    { q: "밥은 무엇인가요?", o: ["동물", "NPC", "장소"], a: 1 }
+    { q: "마을의 구매자는 누구입니까?", o: ["앨버트 Jr.", "카칭", "에릭"], a: 0 },
+    { q: "머드 선피쉬는 어디서 찾을 수 있습니까?", o: ["고요한 바다", "숲 호수", "오로라 강"], a: 0 },
+    { q: "어떤 NPC가 수집품을 관리합니까?", o: ["수집가", "밥", "마시모"], a: 0 },
+    { q: "무지개는 어떤 날씨에 나타납니까?", o: ["폭풍", "안개", "비 온 뒤 맑음"], a: 2 },
+    { q: "낚시꾼 마을은 어디에 있습니까?", o: ["북동쪽", "남서쪽", "동쪽"], a: 1 },
+    { q: "긴꼬리산누에나방은 언제 활동합니까?", o: ["아침", "낮", "밤"], a: 2 },
+    { q: "카피바라는 어디에 살고 있습니까?", o: ["폐허", "다이빙 대", "해변"], a: 0 },
+    { q: "누가 동물(개)을 팝니까?", o: ["버니", "조안 부인", "앤드류"], a: 1 },
+    { q: "산갈치는 어디서 잡을 수 있습니까?", o: ["강", "호수", "바다"], a: 2 },
+    { q: "온천 구역은 어디에 있습니까?", o: ["북쪽", "남쪽", "서쪽"], a: 0 },
+    { q: "유니콘 장수풍뎅이는 어디에 삽니까?", o: ["동쪽 부두", "들판", "숲"], a: 0 },
+    { q: "인디고 마코앵무는 무엇입니까?", o: ["물고기", "곤충", "새"], a: 2 },
+    { q: "나비 비단잉어는 어디에 삽니까?", o: ["민물", "바닷물", "초원 호수"], a: 2 },
+    { q: "NPC 윌은 어디에 있습니까?", o: ["바다 근처", "산속", "숲속"], a: 0 },
+    { q: "물고기 버튼의 색깔은?", o: ["초록색", "파란색", "주황색"], a: 1 },
+    { q: "호박벌은 어디에 삽니까?", o: ["호수", "꽃밭", "동굴"], a: 1 },
+    { q: "수달은 어디에 있습니까?", o: ["등대", "낚시꾼 마을", "폐허"], a: 1 },
+    { q: "판다는 어디 근처에 삽니까?", o: ["다이빙 대", "마을", "부두"], a: 0 },
+    { q: "빙어는 어디에 삽니까?", o: ["초원 호수", "상류 호수", "바다"], a: 0 },
+    { q: "애니는 어디에 있습니까?", o: ["중앙 광장", "해변", "숲"], a: 0 },
+    { q: "라마는 어디에 삽니까?", o: ["보라색 해변", "산", "강"], a: 0 },
+    { q: "이 지도의 평점은 (20점 만점)?", o: ["5", "0", "20"], a: 2 },
+    { q: "파란 가재는 어디에 삽니까?", o: ["숲 호수", "바다", "고요한 바다"], a: 0 },
+    { q: "고래 산은 어느 쪽에 있습니까?", o: ["남쪽", "북쪽", "서쪽"], a: 2 },
+    { q: "Maptopia의 용도는 무엇입니까?", o: ["아이템 판매", "자원 찾기", "게임 대체"], a: 1 },
+    { q: "알락할미새는 무엇입니까?", o: ["새", "물고기", "주민"], a: 1 },
+    { q: "사슴은 어디에 삽니까?", o: ["해변", "참나무 숲", "도시"], a: 1 },
+    { q: "갈고리 나비는 무엇입니까?", o: ["과일", "곤충", "물고기"], a: 1 },
+    { q: "동쪽 부두는 어디에 있습니까?", o: ["북쪽", "동쪽", "남쪽"], a: 1 },
+    { q: "밥은 무엇입니까?", o: ["동물", "NPC", "장소"], a: 1 }
 ];
