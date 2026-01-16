@@ -389,3 +389,4 @@ const QUIZ_DATA = [
     { q: "Bob est un :", o: ["Animal", "PNJ", "Lieu"], a: 1 }
 ];
 
+
