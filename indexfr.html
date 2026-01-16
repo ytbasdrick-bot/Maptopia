@@ -1,171 +1,131 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <link rel="stylesheet" href="mobile.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maptopia - La carte interactive</title>
     
-    <title>Maptopia FR - La Carte Complète</title>
-    <meta property="og:title" content="Maptopia FR - Carte Interactive">
-    <meta property="og:description" content="Localisez tous les PNJ, ressources, poissons et insectes d'Heartopia.">
-    <meta property="og:image" content="https://maptopia-asdrick.com/maptopia.jpg">
-    <meta name="theme-color" content="#8b0000">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.maptopia-asdrick.com/">
+    <meta property="og:title" content="Maptopia - Carte Interactive">
+    <meta property="og:description" content="Découvrez la carte interactive de Maptopia et suivez l'aventure !">
+    <meta property="og:image" content="https://www.maptopia-asdrick.com/maptopia.jpg">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
     
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* Style du menu déroulant intégré */
-        .lang-select-container {
-            margin-bottom: 15px;
-            position: relative;
+        body { margin: 0; padding: 0; font-family: 'Fredoka', sans-serif; background-color: #2c3e50; }
+        #map { height: 100vh; width: 100%; }
+        
+        /* Style des popups */
+        .custom-popup .leaflet-popup-content-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
-        .lang-select {
-            width: 100%;
-            padding: 8px;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #ffd700;
-            border: 1px solid #d4af37;
-            border-radius: 4px;
-            font-family: 'Raleway', sans-serif;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
+        .custom-popup .leaflet-popup-content {
+            margin: 15px;
             text-align: center;
-            transition: all 0.3s ease;
         }
-        .lang-select:hover {
-            background-color: #ffd700;
-            color: #000;
+        .popup-title {
+            color: #e74c3c;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 5px;
         }
-        .lang-select-container::after {
-            content: '▼';
-            font-size: 10px;
-            color: #d4af37;
+        .popup-desc {
+            color: #34495e;
+            font-size: 0.95em;
+        }
+        
+        /* UI Controls Overlay */
+        .ui-controls {
             position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            background: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-like { color: #e74c3c; }
+        .btn-discord { color: #5865F2; }
+        .btn-share { color: #2ecc71; }
+
+        /* Icones simples */
+        .icon { font-size: 1.2em; }
+
+        /* Loading */
+        #loading {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #2c3e50;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2em;
+            transition: opacity 0.5s;
         }
     </style>
 </head>
 <body>
 
-    <div id="quiz-container">
-        <div style="font-size: 40px; margin-bottom: 10px;">🎓</div>
-        <h2 id="quiz-question" style="color: #8b0000; font-size: 20px; margin-top: 0;"></h2>
-        <div id="quiz-options"></div>
-        <p id="quiz-feedback" style="margin-top: 15px; font-weight: 900; font-size: 18px;"></p>
-        <button onclick="closeQuiz()" style="margin-top: 15px; background: #8b0000; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: bold;">QUITTER LE QUIZ</button>
-    </div>
+    <div id="loading">Chargement de Maptopia...</div>
 
-    <audio id="main-audio"><source src="sonheartopia.mp4" type="audio/mp4"></audio>
-
-    <button id="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
-    <button id="mobile-legend-toggle" onclick="toggleMobileLegend()">📌</button>
-
-    <div id="intro-screen">
-        <a href="https://heartopia.xd.com/fr" target="_blank" class="official-link-text">LIEN OFFICIEL HEARTOPIA</a>
-        <h1 class="heartopia-title">MAPTOPIA FR</h1>
-        <div class="welcome-box">
-            <p>Explorez la carte interactive officielle de la communauté Heartopia.</p>
-            <div class="btn-container">
-                <button id="enter-button" class="btn-magic" onclick="startExperience()">✨ ENTRER SUR LA CARTE ✨</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="welcome-modal">
-        <div class="welcome-content">
-            <div class="welcome-header">CHERS HEARTOPIENS</div>
-            <div class="welcome-text">
-                Bienvenue sur <b>Maptopia</b> !<br>
-                <div class="details-list">
-                    • <b>Navigation :</b> Menu compact sur la gauche.<br>
-                    <span class="pc-only">• <b>Marqueurs :</b> Clic droit pour épingler.<br></span>
-                    • <b>Collection :</b> Cochez les cases pour suivre votre progression.<br>
-                    • <b>Ressources :</b> Zones de récolte affichées.<br>
-                    • <b>Sauvegarde :</b> Données enregistrées automatiquement.
-                </div>
-            </div>
-            <button class="btn-rex" onclick="closeWelcome()">C'EST PARTI !</button>
-        </div>
-    </div>
-
-    <div id="social-container">
-        <div id="contact-trigger" onclick="toggleChat()">💬</div>
-        <a href="https://discord.gg/M4BkXRhhUw" target="_blank"><img src="Discord-Logo-PNG-Pic.png" id="discord-img" class="social-btn-img"></a>
-    </div>
-
-    <div id="simple-chat-box">
-        <div class="chat-header"><span>CONTACT</span><button class="close-chat" onclick="toggleChat()">X</button></div>
-        <div class="chat-form">
-            <input type="text" id="user-name" class="chat-input" placeholder="Pseudo Discord">
-            <textarea id="user-msg" class="chat-textarea" placeholder="Message..."></textarea>
-            <button class="chat-submit" onclick="sendToDiscord()">ENVOYER</button>
-            <div id="chat-status"></div>
-        </div>
-    </div>
-
-    <div class="ping-legend" id="legend-box">
-        <div class="lang-select-container">
-            <select class="lang-select" onchange="if (this.value) window.location.href=this.value + '?auto=1'">
-                <option value="" disabled>🌍 LANGUE</option>
-                <option value="indexfr.html" selected>🇫🇷 Français</option>
-                <option value="indexen.html">🇬🇧 English</option>
-                <option value="indexes.html">🇪🇸 Español</option>
-                <option value="indexde.html">🇩🇪 Deutsch</option>
-                <option value="indexit.html">🇮🇹 Italiano</option>
-                <option value="indexpo.html">🇵🇹 Português</option>
-                <option value="indexch.html">🇨🇳 中文 (Chinese)</option>
-                <option value="indexja.html">🇯🇵 日本語 (Japanese)</option>
-                <option value="indexko.html">🇰🇷 한국어 (Korean)</option>
-                <option value="indexin.html">🇮🇩 Bahasa Indonesia</option>
-                <option value="indexthai.html">🇹🇭 ไทย (Thai)</option>
-            </select>
-        </div>
-        <div style="text-align:center; font-weight:bold; border-bottom:1px solid #d4af37; padding-bottom:5px; font-size:12px;">📌 MARQUEURS</div>
-        <div id="legend-list"></div>
-        <div class="rating-container">
-            <div class="like-section">
-                <button id="like-btn-internal" class="like-btn-internal" onclick="toggleLikeInternal()"><span class="heart-icon-anim">❤</span> J'AIME</button>
-                <span id="like-count-internal">...</span>
-            </div>
-        </div>
-        <div class="quiz-section"><div id="quiz-trigger" onclick="openQuiz()">🎓</div></div>
+    <div class="ui-controls">
+        <button class="btn btn-like" id="likeBtn">
+            <span class="icon">❤</span> <span id="likeCount">0</span> J'aime
+        </button>
+        <button class="btn btn-share" onclick="copyLink()">
+            <span class="icon">🔗</span> Partager
+        </button>
+        <button class="btn btn-discord" onclick="window.open('https://discord.gg/votre-invitation', '_blank')">
+            <span class="icon">💬</span> Discord
+        </button>
     </div>
 
     <div id="map"></div>
 
-    <div id="overlay-info" onclick="this.style.display='none'" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10000; justify-content:center; align-items:center;">
-        <div class="info-card" onclick="event.stopPropagation()" style="background:white; padding:5px; border-radius:50px; width:95%; max-width:530px; text-align:center; max-height: 90vh; overflow-y: auto;">
-            <h2 id="info-name" style="color:#8b0000; margin-top:0; border-bottom: 2px solid #d4af37;"></h2>
-            <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: center;">
-                <div style="flex: 1;"><p>MÉTÉO</p><img id="info-weather" src="" style="width:100%;"></div>
-                <div style="flex: 1;"><p>HORAIRES</p><img id="info-time" src="" style="width:100%;"></div>
-            </div>
-            <div style="width: 100%;"><p>EMPLACEMENT</p><img id="info-loc" src="" style="width:100%;"></div>
-            <button onclick="document.getElementById('overlay-info').style.display='none'" style="margin-top:20px; background:#8b0000; color:white; border:none; border-radius:50px; padding:10px;">FERMER</button>
-        </div>
-    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    
+    <script src="https://api.countapi.xyz/hit/maptopia_heartopia_com_v1/visits?callback=visitCallback"></script>
 
-    <script src="data-fr.js"></script> 
+    <script src="data-fr.js"></script>
     <script src="app.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('auto')) {
-                const intro = document.getElementById('intro-screen');
-                if (intro) intro.style.display = 'none';
-                if (typeof startExperience === 'function') { startExperience(); }
-            }
-        });
+        function visitCallback(response) {
+            console.log("Visite enregistrée");
+        }
     </script>
 </body>
 </html>
