@@ -131,6 +131,28 @@
         .welcome-subtitle { font-size: 1.2rem; margin-top: 15px; letter-spacing: 2px; }
         .gold-text { color: #ffd700; font-weight: bold; }
 
+        /* --- BOUTON WIKI (NOUVEAU STYLE) --- */
+        .wiki-container {
+            position: relative; z-index: 35; text-align: center; margin-bottom: 15px;
+            transition: opacity 0.3s ease;
+        }
+        .wiki-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.1rem; color: #ffd700; text-decoration: none;
+            background: rgba(0, 0, 0, 0.6); 
+            border: 2px solid #ffd700; border-radius: 50px;
+            padding: 12px 30px; letter-spacing: 2px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .wiki-btn:hover {
+            background: #ffd700; color: #000;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.9);
+            transform: scale(1.05) translateY(-2px);
+        }
+
         /* --- SELECTION DE LANGUE --- */
         #ui-layer {
             position: relative; z-index: 30;
@@ -168,7 +190,10 @@
             margin-left: 8px;
         }
 
-        body.animating #ui-layer, body.animating #main-header, body.animating .footer-signature { opacity: 0; pointer-events: none; }
+        body.animating #ui-layer, 
+        body.animating #main-header, 
+        body.animating .wiki-container, /* Cache le wiki pendant l'animation */
+        body.animating .footer-signature { opacity: 0; pointer-events: none; }
 
         @media only screen and (max-width: 768px) {
             #ui-layer { grid-template-columns: repeat(2, 1fr); width: 95%; max-height: 50vh; overflow-y: auto; }
@@ -177,6 +202,9 @@
             .welcome-subtitle { font-size: 0.9rem; }
             .footer-signature { bottom: 20px; font-size: 0.8rem; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); padding: 15px 0; }
             .footer-signature span { font-size: 1.2rem; }
+            
+            /* Ajustement mobile pour le bouton Wiki */
+            .wiki-btn { font-size: 0.9rem; padding: 10px 25px; }
         }
     </style>
 </head>
@@ -209,6 +237,12 @@
                 Ne regardez pas seulement la carte. Vivez le <span class="gold-text">voyage</span>.
             </p>
         </header>
+
+        <div class="wiki-container">
+            <a href="https://jayibwi.wixsite.com/wikitopia-guide" target="_blank" class="wiki-btn">
+                📜 WIKI FR
+            </a>
+        </div>
 
         <div id="ui-layer">
             <a href="indexen.html" class="lang-card">English</a>
@@ -248,7 +282,11 @@
 
         const lockScreen = document.getElementById('lock-screen');
         const bgVideo = document.getElementById('bgVideo');
+        
+        // MODIFICATION DU SON ICI
         const bgMusic = document.getElementById('bg-music');
+        bgMusic.volume = 0.1; // Volume réglé à 10%
+
         const clickSound = document.getElementById('click-sound');
         const hoverSound = document.getElementById('hover-sound');
 
@@ -269,7 +307,6 @@
             setTimeout(() => { window.location.href = destination; }, 1400);
         }
 
-        // Modification ici : suppression de la référence à .wiki-btn
         document.querySelectorAll('.lang-card').forEach(card => {
             card.addEventListener('mouseenter', () => { hoverSound.currentTime = 0; hoverSound.play().catch(() => {}); });
             card.addEventListener('click', function(e) { 
@@ -277,6 +314,12 @@
                 triggerTransition(this.getAttribute('href')); 
             });
         });
+
+        const wikiBtn = document.querySelector('.wiki-btn');
+        if (wikiBtn) {
+            wikiBtn.addEventListener('mouseenter', () => { hoverSound.currentTime = 0; hoverSound.play().catch(() => {}); });
+            wikiBtn.addEventListener('click', () => { clickSound.play().catch(() => {}); });
+        }
     </script>
 </body>
 </html>
