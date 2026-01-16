@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="mobile.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Maptopia EN - Heartopia System</title>
+    
+    <title>Maptopia EN - The Complete Map</title>
+    <meta property="og:title" content="Maptopia EN - Interactive Map">
+    <meta property="og:description" content="Locate all NPCs, resources, fish, and bugs in Heartopia.">
+    <meta property="og:image" content="https://maptopia-asdrick.com/maptopia.jpg">
+    <meta name="theme-color" content="#8b0000">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
     <link rel="stylesheet" href="style.css">
     
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        .lang-select-container { margin-bottom: 15px; position: relative; }
+        .lang-select {
+            width: 100%; padding: 8px; background-color: rgba(0, 0, 0, 0.8); color: #ffd700;
+            border: 1px solid #d4af37; border-radius: 4px; font-family: 'Raleway', sans-serif;
+            font-size: 12px; font-weight: bold; cursor: pointer; appearance: none; -webkit-appearance: none;
+            text-align: center; transition: all 0.3s ease;
+        }
+        .lang-select:hover { background-color: #ffd700; color: #000; }
+        .lang-select-container::after {
+            content: '▼'; font-size: 10px; color: #d4af37; position: absolute; right: 10px; top: 50%;
+            transform: translateY(-50%); pointer-events: none;
+        }
+        .lang-select:hover + .lang-select-container::after { color: #000; }
+    </style>
 </head>
 <body>
 
@@ -27,13 +48,10 @@
     <button id="mobile-legend-toggle" onclick="toggleMobileLegend()">📌</button>
 
     <div id="intro-screen">
-        <a href="https://heartopia.xd.com/en" target="_blank" class="official-link-text" title="Heartopia Official Site">
-            HEARTOPIA OFFICIAL LINK
-        </a>
-
+        <a href="https://heartopia.xd.com/en" target="_blank" class="official-link-text">OFFICIAL HEARTOPIA LINK</a>
         <h1 class="heartopia-title">MAPTOPIA EN</h1>
         <div class="welcome-box">
-            <p>Explore the official interactive map of the Heartopia community.</p>
+            <p>Explore the Heartopia community's official interactive map.</p>
             <div class="btn-container">
                 <button id="enter-button" class="btn-magic" onclick="startExperience()">✨ ENTER MAP ✨</button>
             </div>
@@ -44,25 +62,14 @@
         <div class="welcome-content">
             <div class="welcome-header">DEAR HEARTOPIANS</div>
             <div class="welcome-text">
-                Welcome to <b>Maptopia</b>, your companion to explore Heartopia!<br>
-             
+                Welcome to <b>Maptopia</b>!<br>
                 <div class="details-list">
-                    • <b>Navigation:</b> Compact menu on the left to filter.<br>
-                    <span class="pc-only">• <b>Markers:</b> <b>Right Click</b> to pin your own points.<br></span>
-                    • <b>Collection:</b> Check boxes in "Fish", "Bugs", and "Birds" menus to track your progress.<br>
-                    • <b>Resources:</b> NEW! Gathering zones (Wood, Ore, Fruits) are displayed on the map.<br>
-                    • <b>Contact:</b> Use the bubble 💬 at the bottom right to send a private message to the team.<br>
-                    • <b>Email:</b> You can also write to us at <b>maptopiafr@gmail.com</b>.<br>
-                    • <b>Backup:</b> Your data is saved here.
+                    • <b>Navigation:</b> Compact menu on the left.<br>
+                    <span class="pc-only">• <b>Markers:</b> Right-click to pin.<br></span>
+                    • <b>Collection:</b> Check boxes to track progress.<br>
+                    • <b>Resources:</b> Harvest zones displayed.<br>
+                    • <b>Save:</b> Data saved automatically.
                 </div>
-
-                <div class="welcome-note">
-                    🐾 <b>NOTE ON MOVEMENT:</b><br>
-                    Animal movements are fictional but based on their actual zones.
-                    Albert Jr. roams the village to guide you.
-                </div>
-                🛠️ <b>PROJECT STATUS:</b><br>
-                This site is currently in development.
             </div>
             <button class="btn-rex" onclick="closeWelcome()">LET'S GO!</button>
         </div>
@@ -70,93 +77,72 @@
 
     <div id="social-container">
         <div id="contact-trigger" onclick="toggleChat()">💬</div>
-        <a href="https://discord.gg/CGqNppubHv" target="_blank" title="Join Discord" id="discord-link-wrapper">
-            <img src="Discord-Logo-PNG-Pic.png" id="discord-img" class="social-btn-img" alt="Discord">
-        </a>
+        <a href="https://discord.gg/M4BkXRhhUw" target="_blank"><img src="Discord-Logo-PNG-Pic.png" id="discord-img" class="social-btn-img"></a>
     </div>
 
     <div id="simple-chat-box">
-        <div class="chat-header">
-            <span>CONTACT TEAM</span>
-            <button class="close-chat" onclick="toggleChat()">X</button>
-        </div>
+        <div class="chat-header"><span>CONTACT</span><button class="close-chat" onclick="toggleChat()">X</button></div>
         <div class="chat-form">
-            <label class="chat-label">YOUR DISCORD NAME (For reply)</label>
-            <input type="text" id="user-name" class="chat-input" placeholder="Ex: Rex#1234">
-
-            <label class="chat-label">YOUR MESSAGE</label>
-            <textarea id="user-msg" class="chat-textarea" placeholder="An idea? A bug? Tell us everything..."></textarea>
-
+            <input type="text" id="user-name" class="chat-input" placeholder="Discord Name">
+            <textarea id="user-msg" class="chat-textarea" placeholder="Message..."></textarea>
             <button class="chat-submit" onclick="sendToDiscord()">SEND</button>
             <div id="chat-status"></div>
-
-            <div class="chat-footer-mail">
-                Or by email: <a href="mailto:maptopiafr@gmail.com?subject=Contact%20Maptopia">maptopiafr@gmail.com</a>
-            </div>
         </div>
     </div>
 
     <div class="ping-legend" id="legend-box">
-        <div class="language-selector legend-langs" style="margin-bottom: 10px; display: flex; gap: 8px; justify-content: center;">
-            <a href="index.html" class="btn-lang-switch">🌍 CHANGE LANGUAGE</a>
+        <div class="lang-select-container">
+            <select class="lang-select" onchange="if (this.value) window.location.href=this.value + '?auto=1'">
+                <option value="" disabled>🌍 LANGUAGE</option>
+                <option value="indexfr.html">🇫🇷 Français</option>
+                <option value="indexen.html" selected>🇬🇧 English</option> <option value="indexes.html">🇪🇸 Español</option>
+                <option value="indexde.html">🇩🇪 Deutsch</option>
+                <option value="indexit.html">🇮🇹 Italiano</option>
+                <option value="indexpo.html">🇵🇹 Português</option>
+                <option value="indexch.html">🇨🇳 中文 (Chinese)</option>
+                <option value="indexja.html">🇯🇵 日本語 (Japanese)</option>
+                <option value="indexko.html">🇰🇷 한국어 (Korean)</option>
+                <option value="indexin.html">🇮🇩 Bahasa Indonesia</option>
+                <option value="indexthai.html">🇹🇭 ไทย (Thai)</option>
+            </select>
         </div>
-
-        <div style="text-align:center; font-weight:bold; border-bottom:1px solid #d4af37; padding-bottom:5px; font-size:12px;"></div>
-        
-        <div style="text-align:center; font-weight:bold; border-bottom:1px solid #d4af37; padding-bottom:5px; font-size:12px;">📌 MY MARKERS</div>
+        <div style="text-align:center; font-weight:bold; border-bottom:1px solid #d4af37; padding-bottom:5px; font-size:12px;">📌 MARKERS</div>
         <div id="legend-list"></div>
-        <div class="legend-guide">
-            <div class="guide-row pc-only"><span class="guide-icon">🖥️</span><span><b>PC:</b> Right Click = Pin</span></div>
-            <div class="guide-row"><span class="guide-icon">📱</span><span><b>Mobile:</b> Top Left Menu</span></div>
-        </div>
-
         <div class="rating-container">
             <div class="like-section">
-                <button id="like-btn-internal" class="like-btn-internal" onclick="toggleLikeInternal()">
-                    <span class="heart-icon-anim">❤</span> LIKE THE MAP
-                </button>
-                <span id="like-count-internal">Loading...</span>
-            </div>
-            <p style="font-size:9px; color:#777; margin-top:5px;">(Click to support!)</p>
-        </div>
-        <div class="quiz-section">
-            <p style="font-size:10px; color:#aaa; margin-bottom:5px; text-align:center;">TEST YOUR KNOWLEDGE</p>
-            <div style="display: flex; justify-content: center;">
-                <div id="quiz-trigger" onclick="openQuiz()">🎓</div>
+                <button id="like-btn-internal" class="like-btn-internal" onclick="toggleLikeInternal()"><span class="heart-icon-anim">❤</span> LIKE</button>
+                <span id="like-count-internal">...</span>
             </div>
         </div>
+        <div class="quiz-section"><div id="quiz-trigger" onclick="openQuiz()">🎓</div></div>
     </div>
 
     <div id="map"></div>
 
     <div id="overlay-info" onclick="this.style.display='none'" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10000; justify-content:center; align-items:center;">
         <div class="info-card" onclick="event.stopPropagation()" style="background:white; padding:5px; border-radius:50px; width:95%; max-width:530px; text-align:center; max-height: 90vh; overflow-y: auto;">
-            <h2 id="info-name" style="color:#8b0000; margin-top:0; text-transform:uppercase; border-bottom: 2px solid #d4af37; padding-bottom: 5px;"></h2>
-
+            <h2 id="info-name" style="color:#8b0000; margin-top:0; border-bottom: 2px solid #d4af37;"></h2>
             <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: center;">
-                <div style="flex: 1;">
-                    <p style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">WEATHER</p>
-                    <img id="info-weather" src="" style="width:100%; border-radius:8px; border: 1px solid #eee;">
-                </div>
-                <div style="flex: 1;">
-                    <p style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">SCHEDULE</p>
-                    <img id="info-time" src="" style="width:100%; border-radius:8px; border: 1px solid #eee;">
-                </div>
+                <div style="flex: 1;"><p>WEATHER</p><img id="info-weather" src="" style="width:100%;"></div>
+                <div style="flex: 1;"><p>TIME</p><img id="info-time" src="" style="width:100%;"></div>
             </div>
-
-            <div style="width: 100%; margin-top: 10px;">
-                <p style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">CAPTURE ZONE</p>
-                <img id="info-loc" src="" style="width:100%; max-width: 550px; border-radius:12px; border: 2px solid #d4af37; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            </div>
-
-            <button onclick="document.getElementById('overlay-info').style.display='none'" style="margin-top:20px; padding:12px 30px; cursor:pointer; background:#8b0000; color:white; border:none; border-radius:50px; font-weight:bold; text-transform:uppercase;">CLOSE</button>
+            <div style="width: 100%;"><p>LOCATION</p><img id="info-loc" src="" style="width:100%;"></div>
+            <button onclick="document.getElementById('overlay-info').style.display='none'" style="margin-top:20px; background:#8b0000; color:white; border:none; border-radius:50px; padding:10px;">CLOSE</button>
         </div>
     </div>
 
-    <script src="data-en.js"></script>
-
+    <script src="data-en.js"></script> 
     <script src="app.js"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('auto')) {
+                const intro = document.getElementById('intro-screen');
+                if (intro) intro.style.display = 'none';
+                if (typeof startExperience === 'function') { startExperience(); }
+            }
+        });
+    </script>
 </body>
-
 </html>
