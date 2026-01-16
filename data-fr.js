@@ -54,7 +54,8 @@ const PNJ_DATA = [
     [-528.3, 560.3, "Blanc", "pnj/blanc.png"],
     [-499.8, 499.0, "Annie", "pnj/annie.png"],
     [-532.4, 634.8, "Albert Jr.", "pnj/albert jr.png"],
-    [-734.8, 445.8, "Bill", "pnj/bill.png"]
+    [-734.8, 445.8, "Bill", "pnj/bill.png"],
+    [-509.4, 414, "Doris (pluie)", "pnj/doris.png"]
 ];
 
 // 3. BUS
@@ -119,18 +120,14 @@ const LIEUX_DATA = [
     {pos:[-670,450], name:"Ponton Est", type:"label-ville", startOn:true}
 ];
 
-// // 7. RESSOURCES
+// 7. RESSOURCES
 const resourcesData = {
     "Framboise": { icon: "resource/framboise.png", positions: [[-680.8, 330.9], [-668.5, 352.1], [-667.9, 268.5], [-648.3, 288.6], [-613.5, 317.4], [-602.8, 274.5], [-617.6, 211.6], [-571.5, 254.4], [-538.9, 208.6], [-527.8, 251.6], [-535.8, 288.3], [-503.1, 242.9], [-495, 222.4], [-453.8, 222.4], [-438.6, 246], [-395, 247.4], [-387.1, 269.5]] },
     "Myrtille": { icon: "resource/myrtille.png", positions: [[-642.9, 371.9], [-631.9, 368.4], [-628.5, 365.5], [-606.8, 350.3], [-602.5, 342.3], [-590.1, 334.1], [-575.6, 332.1], [-562.1, 330], [-544.9, 324.5], [-518.4, 320.3], [-515.9, 320.5], [-500.8, 321.1], [-479.3, 328.6], [-468.3, 320], [-437.3, 313.9], [-411.4, 311.4], [-400.3, 311.4], [-379.5, 304.1], [-327.4, 352], [-313.6, 339], [-328.6, 371.5], [-324.4, 389.3], [-297.9, 410.8], [-271.6, 395.4], [-319.9, 413.5], [-330.4, 421.6], [-333.4, 450], [-338.6, 468.6], [-297.4, 484.4], [-349, 489.4], [-356.5, 499.3], [-360.4, 526.4], [-355.5, 545.1], [-352.9, 565.9], [-316, 558.1], [-363.6, 578.4], [-365.3, 609], [-360.9, 628.1], [-343, 634], [-388, 655.4], [-400.9, 654.3], [-421.9, 656.4], [-444.1, 670.6], [-462.5, 654], [-476.8, 654.6], [-491.6, 656.3], [-506.4, 672.4], [-525.4, 688], [-542.6, 650], [-559.3, 644.9], [-575.6, 651], [-597.8, 643.8], [-604.8, 633.8], [-627.9, 619.4]] },
     "Pomme": { icon: "resource/pomme.png", positions: [[-356.3, 493], [-365.4, 560.1], [-362.4, 581], [-324.6, 570.1], [-296, 610.3], [-365.6, 619.5], [-362.8, 628.5], [-393.5, 654.8], [-420.6, 653.3], [-436.1, 665.4], [-444.4, 685.1], [-436.6, 697.5], [-458.4, 744.9], [-505, 677.3], [-494.5, 657], [-459.8, 653.6], [-530.1, 677.9], [-540.1, 648.6], [-592.8, 676.6], [-606.9, 634.1], [-629.3, 623]] },
     "Grand Arbre": { icon: "resource/grand arbre.png", positions: [[-612, 424.5], [-641.8, 369], [-351, 329.5], [-414.3, 337.1], [-396.3, 608.9], [-376.3, 624], [-616, 593.6], [-672.3, 642]] },
-    "Bois de chêne glissant": { icon: "resource/bois de chaine glissant.png", positions: [[-532, 787.3]] },
     "Pierre": { icon: "resource/pierre.png", positions: [[-615.9, 316], [-641.5, 278.8], [-558.4, 257.4], [-535, 292], [-499.5, 241.1], [-466.8, 283.1], [-407.1, 244.1], [-284, 402.8], [-254.6, 367.9], [-309.4, 479.1], [-263, 466.6], [-289.1, 544.6], [-315.5, 567.9], [-298.6, 625.4], [-391.3, 726.9], [-443.6, 697], [-468.6, 733.8], [-519, 714.9], [-564.9, 732.8], [-605.1, 680.3], [-673.9, 684.1]] },
-    "Fluorite": { icon: "resource/fluorite.png", positions: [[-417.8, 313.8]] },
     "Orange": { icon: "resource/orange.png", positions: [[-650.1, 370.9], [-639.5, 372], [-607.3, 351.4], [-602.9, 343.5], [-588.6, 336.6], [-559.6, 329.5], [-542.1, 324.8], [-515, 319.5], [-470.5, 321], [-461.4, 271.5], [-410.8, 314], [-397.3, 310.1], [-310.9, 339.3], [-327.6, 373.9], [-324.9, 391.9], [-295.4, 411.1], [-330.4, 420.9], [-333.8, 452.9]] },
-    
-    // --- NOUVEAUX CHAMPIGNONS AJOUTÉS ---
     "Cèpe de Bordeaux": { 
         icon: "resource/cépes de bordeaux.png", 
         positions: [
@@ -177,6 +174,7 @@ const resourcesData = {
         ] 
     }
 };
+
 // 8. POISSONS
 const fishList = [
     {name:"Ablette", bg:"condition/ablette_lieu.png", cond:"condition/ablette_meteo.png", heure:"condition/ablette_heure.png"},
@@ -196,7 +194,7 @@ const fishList = [
     {name:"Carpe noire", bg:"condition/carpe_noire_lieu.png", cond:"condition/carpe_noire_meteo.png", heure:"condition/carpe_noire_heure.png"},
     {name:"Chabot", bg:"condition/chabot_lieu.png", cond:"condition/chabot_meteo.png", heure:"condition/chabot_heure.png"},
     {name:"Chimère argentée", bg:"condition/chimere_argentee_lieu.png", cond:"condition/chimere_argentee_meteo.png", heure:"condition/chimere_argentee_heure.png"},
-    {name:"Comète", bg:"condition/comete_coussut_lieu.png", cond:"condition/comete_coussut_meteo.png", heure:"condition/comete_coussut_heure.png"},
+    {name:"Comète coussut", bg:"condition/comete_coussut_lieu.png", cond:"condition/comete_coussut_meteo.png", heure:"condition/comete_coussut_heure.png"},
     {name:"Crabe de ruisseau", bg:"condition/crabe_de_ruisseau_lieu.png", cond:"condition/crabe_de_ruisseau_meteo.png", heure:"condition/crabe_de_ruisseau_heure.png"},
     {name:"Crevette de la mer", bg:"condition/crevette_de_la_mer_lieu.png", cond:"condition/crevette_de_la_mer_meteo.png", heure:"condition/crevette_de_la_mer_heure.png"},
     {name:"Crevette verte", bg:"condition/crevette_verte_lieu.png", cond:"condition/crevette_verte_meteo.png", heure:"condition/crevette_verte_heure.png"},
@@ -253,29 +251,45 @@ const fishList = [
 
 // 9. INSECTES
 const bugList = [
+    {name:"Abeille à queue blanche", bg:"condition/abeille_a_queue_blanche_lieu.png", cond:"condition/abeille_a_queue_blanche_meteo.png", heure:"condition/abeille_a_queue_blanche_heure.png"},
+    {name:"Abeille charpentière bleue", bg:"condition/Abeille_charpentière_bleue_lieu.png", cond:"condition/Abeille_charpentière_bleue_meteo.png", heure:"condition/Abeille_charpentière_bleue_heure.png"},
+    {name:"Abeille charpentière violette", bg:"condition/abeille_charpentiere_violette_lieu.png", cond:"condition/abeille_charpentiere_violette_meteo.png", heure:"condition/abeille_charpentiere_violette_heure.png"},
     {name:"Actias neidhoederi", bg:"condition/actias_neidhoederi_lieu.png", cond:"condition/actias_neidhoederi_meteo.png", heure:"condition/actias_neidhoederi_heure.png"},
     {name:"Azuré des nerpruns", bg:"condition/azure_de_porcelaine_lieu.png", cond:"condition/azure_de_porcelaine_meteo.png", heure:"condition/azure_de_porcelaine_heure.png"},
     {name:"Bourdon", bg:"condition/bourdon_lieu.png", cond:"condition/bourdon_meteo.png", heure:"condition/bourdon_heure.png"},
+    {name:"Capricorne tigre", bg:"condition/capricorne_tigre_lieu.jpg", cond:"condition/capricorne_tigre_meteo.png", heure:"condition/capricorne_tigre_heure.png"},
     {name:"Cétoine étoile bleue", bg:"condition/cetoine_etoilee_bleue_lieu.png", cond:"condition/cetoine_etoilee_bleue_meteo.png", heure:"condition/cetoine_etoilee_bleue_heure.png"},
     {name:"Cicindèle verte", bg:"condition/cicindele_verte_lieu.png", cond:"condition/cicindele_verte_meteo.png", heure:"condition/cicindele_verte_heure.png"},
+    {name:"Cigale", bg:"condition/cigale_lieu.png", cond:"condition/cigale_meteo.png", heure:"condition/cigale_heure.png"},
     {name:"Citron aspasia", bg:"condition/citron_aspasia_lieu.png", cond:"condition/citron_aspasia_meteo.png", heure:"condition/citron_aspasia_heure.png"},
     {name:"Coccinelle à 7 points", bg:"condition/coccinelle_a_sept_points_lieu.png", cond:"condition/coccinelle_a_sept_points_meteo.png", heure:"condition/coccinelle_a_sept_points_heure.png"},
     {name:"Coccinelle asiatique", bg:"condition/coccinelle_asiatique_lieu.png", cond:"condition/coccinelle_asiatique_meteo.png", heure:"condition/coccinelle_asiatique_heure.png"},
     {name:"Criocère de l'asperge", bg:"condition/criocere_de_lasperge_lieu.png", cond:"condition/criocere_de_lasperge_meteo.png", heure:"condition/criocere_de_lasperge_heure.png"},
+    {name:"Criquet à ailes réticulées", bg:"condition/criquet_a_ailes_reticulees_lieu.png", cond:"condition/criquet_a_ailes_reticulees_meteo.png", heure:"condition/criquet_a_ailes_reticulees_heure.png"},
     {name:"Criquet aux pattes massives", bg:"condition/criquet_aux_pattes_massives_lieu.png", cond:"condition/criquet_aux_pattes_massives_meteo.png", heure:"condition/criquet_aux_pattes_massives_heure.png"},
+    {name:"Fourmi", bg:"condition/fourmi_lieu.png", cond:"condition/fourmi_meteo.png", heure:"condition/fourmi_heure.png"},
     {name:"Grand agrion", bg:"condition/grand_agrion_lieu.png", cond:"condition/grand_agrion_meteo.png", heure:"condition/grand_agrion_heure.png"},
+    {name:"Grillon", bg:"condition/grillon_lieu.jpg", cond:"condition/grillon_meteo.png", heure:"condition/grillon_heure.png"},
+    {name:"Libellule à queue blanche", bg:"condition/libellule_a_queue_blanche_lieu.png", cond:"condition/libellule_a_queue_blanche_meteo.png", heure:"condition/libellule_a_queue_blanche_heure.png"},
     {name:"Libellule tachetée", bg:"condition/libellule_tachetee_lieu.png", cond:"condition/libellule_tachetee_meteo.png", heure:"condition/libellule_tachetee_heure.png"},
+    {name:"Mante arc-en-ciel", bg:"condition/mante_arcenciel_lieu.png", cond:"condition/mante_arcenciel_meteo.png", heure:"condition/mante_arcenciel_heure.png"},
+    {name:"Mante papoue", bg:"condition/mante_papoue_lieu.png", cond:"condition/mante_papoue_meteo.png", heure:"condition/mante_papoue_heure.png"},
+    {name:"Mélitée léopard", bg:"condition/melitee_leopard_lieu.png", cond:"condition/melitee_leopard_meteo.png", heure:"condition/melitee_leopard_heure.png"},
+    {name:"Paon-du-jour", bg:"condition/paondujour_lieu.png", cond:"condition/paondujour_meteo.png", heure:"condition/paondujour_heure.png"},
     {name:"Papillon à anneaux rouges", bg:"condition/papillon_a_anneaux_rouges_lieu.png", cond:"condition/papillon_a_anneaux_rouges_meteo.png", heure:"condition/papillon_a_anneaux_rouges_heure.png"},
     {name:"Papillon à col rouge", bg:"condition/papillon_a_col_rouge_lieu.png", cond:"condition/papillon_a_col_rouge_meteo.png", heure:"condition/papillon_a_col_rouge_heure.png"},
     {name:"Papillon blanc", bg:"condition/papillon_blanc_lieu.png", cond:"condition/papillon_blanc_meteo.png", heure:"condition/papillon_blanc_heure.png"},
     {name:"Papillon doré", bg:"condition/papillon_dore_lieu.png", cond:"condition/papillon_dore_meteo.png", heure:"condition/papillon_dore_heure.png"},
+    {name:"Papillon sorcière blanche", bg:"condition/Papillon_sorcière_blanche_lieu.png", cond:"condition/Papillon_sorcière_blanche_meteo.png", heure:"condition/Papillon_sorcière_blanche_heure.png"},
     {name:"Parnassien", bg:"condition/parnassien_lieu.png", cond:"condition/parnassien_meteo.png", heure:"condition/parnassien_heure.png"},
     {name:"Piéride du cresson", bg:"condition/pieride_du_cresson_lieu.png", cond:"condition/pieride_du_cresson_meteo.png", heure:"condition/pieride_du_cresson_heure.png"},
     {name:"Punaise Picasso", bg:"condition/punaise_picasso_lieu.png", cond:"condition/punaise_picasso_meteo.png", heure:"condition/punaise_picasso_heure.png"},
     {name:"Pyrochroa", bg:"condition/pyrochroa_lieu.png", cond:"condition/pyrochroa_meteo.png", heure:"condition/pyrochroa_heure.png"},
     {name:"Pyrrhocore", bg:"condition/pyrrhocoris_apterus_lieu.png", cond:"condition/pyrrhocoris_apterus_meteo.png", heure:"condition/pyrrhocoris_apterus_heure.png"},
     {name:"Sauterelle de l'oasis", bg:"condition/sauterelle_de_loasis_lieu.png", cond:"condition/sauterelle_de_loasis_meteo.png", heure:"condition/sauterelle_de_loasis_heure.png"},
-    {name:"Scarabée licorne", bg:"condition/scarabee_unicorne_lieu.png", cond:"condition/scarabee_unicorne_meteo.png", heure:"condition/scarabee_unicorne_heure.png"}
+    {name:"Sauterelle rose", bg:"condition/sauterelle_rose_lieu.jpg", cond:"condition/sauterelle_rose_meteo.png", heure:"condition/sauterelle_rose_heure.png"},
+    {name:"Scarabée licorne", bg:"condition/scarabee_unicorne_lieu.png", cond:"condition/scarabee_unicorne_meteo.png", heure:"condition/scarabee_unicorne_heure.png"},
+    {name:"Vanesse violette", bg:"condition/Vanesse_violette_lieu.png", cond:"condition/Vanesse_violette_meteo.png", heure:"condition/Vanesse_violette_heure.png"}
 ];
 
 // 10. OISEAUX
@@ -343,7 +357,7 @@ const birdList = [
 
 // 11. QUIZ (Renommé QUIZ_DATA pour être cohérent avec app.js)
 const QUIZ_DATA = [
-    { q: "Qui est le guide du village ?", o: ["Albert Jr.", "Barnabé", "Eric"], a: 0 },
+    { q: "Qui est l'acheteur du village ?", o: ["Albert Jr.", "ka ching", "Eric"], a: 0 },
     { q: "Où trouve-t-on l'Acantharchus pomotis ?", o: ["Mer Calme", "Lac de la Forêt", "Rivière Aurore"], a: 0 },
     { q: "Quel PNJ gère les trouvailles ?", o: ["Le Collectionneur", "Bob", "Massimo"], a: 0 },
     { q: "Quelle météo crée l'arc-en-ciel ?", o: ["Orage", "Brume", "Soleil après pluie"], a: 2 },
