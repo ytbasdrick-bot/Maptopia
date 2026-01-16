@@ -7,7 +7,7 @@
     
     <title>Maptopia FR - La Carte Complète</title>
     <meta property="og:title" content="Maptopia FR - Carte Interactive">
-    <meta property="og:description" content="Localisez tous les PNJ, ressources, poissons et insectes d'Heartopia.">
+    <meta property="og:description" content="Localisez tous les PNJ, ressources, poissons et insectes dans Heartopia.">
     <meta property="og:image" content="https://maptopia-asdrick.com/maptopia.jpg">
     <meta name="theme-color" content="#8b0000">
 
@@ -17,61 +17,19 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <style>
-        /* Style du menu déroulant intégré */
-        .lang-select-container {
-            margin-bottom: 15px;
-            position: relative;
-        }
+        .lang-select-container { margin-bottom: 15px; position: relative; }
         .lang-select {
-            width: 100%;
-            padding: 8px;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #ffd700;
-            border: 1px solid #d4af37;
-            border-radius: 4px;
-            font-family: 'Raleway', sans-serif;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
-            text-align: center;
-            transition: all 0.3s ease;
+            width: 100%; padding: 8px; background-color: rgba(0, 0, 0, 0.8); color: #ffd700;
+            border: 1px solid #d4af37; border-radius: 4px; font-family: 'Raleway', sans-serif;
+            font-size: 12px; font-weight: bold; cursor: pointer; appearance: none; -webkit-appearance: none;
+            text-align: center; transition: all 0.3s ease;
         }
-        .lang-select:hover {
-            background-color: #ffd700;
-            color: #000;
-        }
+        .lang-select:hover { background-color: #ffd700; color: #000; }
         .lang-select-container::after {
-            content: '▼';
-            font-size: 10px;
-            color: #d4af37;
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
+            content: '▼'; font-size: 10px; color: #d4af37; position: absolute; right: 10px; top: 50%;
+            transform: translateY(-50%); pointer-events: none;
         }
-
-        /* Style pour le lien Wiki dans le modal */
-        .wiki-alert {
-            margin-top: 15px;
-            padding: 10px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px dashed #d4af37;
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
-        .wiki-link {
-            color: #8b0000;
-            font-weight: bold;
-            text-decoration: underline;
-            display: inline-block;
-            margin-top: 5px;
-        }
-        .wiki-link:hover {
-            color: #ffd700;
-        }
+        .lang-select:hover + .lang-select-container::after { color: #000; }
     </style>
 </head>
 <body>
@@ -109,13 +67,8 @@
                     • <b>Navigation :</b> Menu compact sur la gauche.<br>
                     <span class="pc-only">• <b>Marqueurs :</b> Clic droit pour épingler.<br></span>
                     • <b>Collection :</b> Cochez les cases pour suivre votre progression.<br>
+                    • <b>Ressources :</b> Zones de récolte affichées.<br>
                     • <b>Sauvegarde :</b> Données enregistrées automatiquement.
-                </div>
-
-                <div class="wiki-alert">
-                    ℹ️ Une info manque sur la carte ? <br>
-                    Retrouvez tous les détails (niveaux, guides, astuces) sur le : <br>
-                    <a href="https://jayibwi.wixsite.com/wikitopia-guide" target="_blank" class="wiki-link">📖 WIKI OFFICIEL HEARTOPIA</a>
                 </div>
             </div>
             <button class="btn-rex" onclick="closeWelcome()">C'EST PARTI !</button>
@@ -172,7 +125,7 @@
             <h2 id="info-name" style="color:#8b0000; margin-top:0; border-bottom: 2px solid #d4af37;"></h2>
             <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: center;">
                 <div style="flex: 1;"><p>MÉTÉO</p><img id="info-weather" src="" style="width:100%;"></div>
-                <div style="flex: 1;"><p>HORAIRES</p><img id="info-time" src="" style="width:100%;"></div>
+                <div style="flex: 1;"><p>HEURE</p><img id="info-time" src="" style="width:100%;"></div>
             </div>
             <div style="width: 100%;"><p>EMPLACEMENT</p><img id="info-loc" src="" style="width:100%;"></div>
             <button onclick="document.getElementById('overlay-info').style.display='none'" style="margin-top:20px; background:#8b0000; color:white; border:none; border-radius:50px; padding:10px;">FERMER</button>
@@ -191,6 +144,13 @@
                 if (typeof startExperience === 'function') { startExperience(); }
             }
         });
+
+        // Sécurité anti-chargement infini : cache les images qui ne chargent pas
+        document.addEventListener('error', function (e) {
+            if (e.target.tagName === 'IMG') {
+                e.target.style.display = 'none';
+            }
+        }, true);
     </script>
 </body>
 </html>
