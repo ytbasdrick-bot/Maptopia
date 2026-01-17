@@ -111,21 +111,27 @@ function toggleMobileLegend() {
     if(legend && legend.classList.contains('mobile-visible') && menu) menu.classList.remove('mobile-visible');
 }
 function startExperience() {
-    const audio = document.getElementById('main-audio');
-    if(audio) audio.play().catch(() => {});
-    document.getElementById('intro-screen').style.opacity = '0';
-    document.getElementById('map').style.opacity = '1';
-    setTimeout(() => {
-        document.getElementById('intro-screen').style.display = 'none';
-        const welcome = document.getElementById('welcome-modal');
-        if(welcome) welcome.style.display = 'flex';
-    }, 800);
+    // Cache l'écran d'intro
+    document.getElementById('intro-screen').style.display = 'none';
+    
+    // Affiche la carte
+    const mapEl = document.getElementById('map');
+    if(mapEl) mapEl.style.opacity = '1';
+    
+    // Affiche la bannière d'affiliation
+    const banner = document.getElementById('affiliation-banner');
+    if(banner) banner.style.display = 'block';
+    
+    // GESTION DU SON
+    let audio = document.getElementById('main-audio');
+    if(audio) {
+        // BAISSE LE VOLUME ICI (0.0 est muet, 1.0 est le maximum)
+        // 0.2 correspond à 20% du volume original
+        audio.volume = 0.2; 
+        
+        audio.play().catch(() => console.log("Audio bloqué par le navigateur"));
+    }
 }
-function closeWelcome() { 
-    const welcome = document.getElementById('welcome-modal');
-    if(welcome) welcome.style.display = 'none'; 
-}
-
 // --- CONFIGURATION CARTE ---
 var bounds = [[-1000, 0], [0, 1000]];
 var map = L.map('map', { crs: L.CRS.Simple, minZoom: 0, maxZoom: 3, zoom: 1, zoomControl: false, maxBounds: bounds, maxBoundsViscosity: 1.0 });
