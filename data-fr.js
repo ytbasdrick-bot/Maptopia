@@ -34,29 +34,30 @@ const TEXTS = {
     }
 };
 
-// 2. LISTE DES PNJS
+// 2. NPC LIST
 const PNJ_DATA = [
     [-471, 501, "Bob", "pnj/bob.png"],
     [-526, 499, "Atara", "pnj/atara.png"],
-    [-478, 493, "Collectionneur", "pnj/collectioneur.png"],
+    [-478, 493, "collectionneur", "pnj/collectioneur.png"],
     [-469, 488, "Dorothée", "pnj/dorothée.png"],
     [-446, 493, "Massimo", "pnj/massimo.png"],
-    [-412, 418, "Ka Ching", "pnj/ka ching.png"], /* Corrigé sans espace */
+    [-412, 418, "Ka Ching", "pnj/ka ching.png"],
     [-399, 591, "Andrew", "pnj/andrew.png"],
     [-259, 522, "Eric", "pnj/eric.png"],
     [-456, 549, "Vanya", "pnj/vanya.png"],
     [-502, 582, "Naniwa", "pnj/naniwa.png"],
-    [-502, 519, "Mme Joan", "pnj/mme joan.png"], /* Corrigé sans espace */
+    [-502, 519, "Mme. Joan", "pnj/mme joan.png"],
     [-807, 419, "Will", "pnj/will.png"],
     [-355, 809, "Patti", "pnj/patti.png"],
     [-653, 225, "Vernie", "pnj/vernie.png"],
-    [-498, 526, "Bailey j", "pnj/bayleyj.png"],
+    [-498, 526, "Bailey J", "pnj/bayleyj.png"],
     [-528.3, 560.3, "Blanc", "pnj/blanc.png"],
     [-499.8, 499.0, "Annie", "pnj/annie.png"],
-    [-532.4, 634.8, "Albert Jr.", "pnj/albert jr.png"], /* Corrigé sans espace */
+    [-532.4, 634.8, "Albert Jr.", "pnj/albert jr.png"],
     [-734.8, 445.8, "Bill", "pnj/bill.png"],
     [-509.4, 414, "Doris (pluie)", "pnj/doris.png"]
 ];
+
 
 // 3. BUS
 const BUS_DATA = [
@@ -390,4 +391,5 @@ const QUIZ_DATA = [
     { q: "Le Quai Oriental est au :", o: ["Nord", "Est", "Sud"], a: 1 },
     { q: "Bob est un :", o: ["Animal", "PNJ", "Lieu"], a: 1 }
 ];
+
 
