@@ -127,7 +127,7 @@ function startExperience() {
     if(audio) {
         // BAISSE LE VOLUME ICI (0.0 est muet, 1.0 est le maximum)
         // 0.2 correspond à 20% du volume original
-        audio.volume = 0.2; 
+        audio.volume = 0.1; 
         
         audio.play().catch(() => console.log("Audio bloqué par le navigateur"));
     }
@@ -495,3 +495,4 @@ function finishQuiz() {
 
 // LANCEMENT
 loadExternalData();
+
