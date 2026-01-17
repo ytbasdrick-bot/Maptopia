@@ -89,7 +89,7 @@ const ANIMAL_DATA = [
 // 6. LIEUX
 const LIEUX_DATA = [
     {pos:[-538,492], name:"Place Centrale", type:"label-ville", startOn:true}, 
-    {pos:[-692,506], name:"Village Pêcheurs", type:"label-ville", startOn:true}, 
+    {pos:[-692,506], name:"Place du Village de Pêcheurs", type:"label-ville", startOn:true}, 
     {pos:[-438,513], name:"Rue des Habitants", type:"label-ville", startOn:true}, 
     {pos:[-649,185], name:"Champ de Fleurs", type:"label-ville", startOn:true}, 
     {pos:[-440,184], name:"Montagne de la Baleine", type:"label-ville", startOn:true}, 
@@ -99,7 +99,7 @@ const LIEUX_DATA = [
     {pos:[-531,805], name:"Forêt des Chênes", type:"label-ville", startOn:true}, 
     {pos:[-494,429], name:"Rue des Arts", type:"label-ville", startOn:true}, 
     {pos:[-510,558], name:"Rue des Jardins", type:"label-ville", startOn:true}, 
-    {pos:[-736,602], name:"Quai Oriental", type:"label-ville", startOn:true}, 
+    {pos:[-736,602], name:"Quai Oriental du village de pecheurs", type:"label-ville", startOn:true}, 
     {pos:[-690,402], name:"Le Quai", type:"label-ville", startOn:true}, 
     {pos:[-780,387], name:"Phare", type:"label-ville", startOn:true}, 
     {pos:[-691,783], name:"Tremplin", type:"label-ville", startOn:true}, 
@@ -114,13 +114,10 @@ const LIEUX_DATA = [
     {pos:[-176,394], name:"Lac Volcanique", type:"label-eau", startOn:true}, 
     {pos:[-265,537], name:"Lac de la source Thermale", type:"label-eau", startOn:true}, 
     {pos:[-344,652], name:"Rivière Peu Profonde", type:"label-eau", startOn:true}, 
-    {pos:[-598,748], name:"Lac de la Forêt", type:"label-eau", startOn:true}, 
-    {pos:[-431,774], name:"Haut Lac Forêt", type:"label-eau", startOn:true}, 
+    {pos:[-598,748], name:"Lac de la Forêt", type:"label-eau", startOn:true},  
     {pos:[-608,481], name:"Lac de Banlieue", type:"label-eau", startOn:true}, 
-    {pos:[-669,368], name:"Rivière Tranquille", type:"label-eau", startOn:true}, 
-    {pos:[-674,627], name:"Rivière Arbres Géants", type:"label-eau", startOn:true}, 
-    {pos:[-600,600], name:"Champ de Fleurs au Moulin", type:"label-ville", startOn:true}, 
-    {pos:[-670,450], name:"Ponton Est", type:"label-ville", startOn:true}
+    {pos:[-669,368], name:"Rivière calme", type:"label-eau", startOn:true}, 
+    {pos:[-674,627], name:"Rivière Arbres Géants", type:"label-eau", startOn:true},  
 ];
 
 // 7. RESSOURCES
@@ -391,5 +388,6 @@ const QUIZ_DATA = [
     { q: "Le Quai Oriental est au :", o: ["Nord", "Est", "Sud"], a: 1 },
     { q: "Bob est un :", o: ["Animal", "PNJ", "Lieu"], a: 1 }
 ];
+
 
 
