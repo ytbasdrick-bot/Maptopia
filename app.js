@@ -227,7 +227,10 @@ function register(cat, pos, name, img, opts = {}) {
     else iAnchor = [30,60];
 
     var customClass = (cat === 'pnj') ? 'pnj-icon' : '';
-    if(cat === 'pnj' && window.innerWidth <= 768) img = img.replace('pnj/', 'pnjmobil/');
+    
+    // --- CORRECTION MOBILE : DÉSACTIVÉ POUR ÉVITER LES IMAGES MANQUANTES ---
+    // Si vous avez un dossier "pnjmobil" sur votre serveur, vous pouvez décommenter la ligne ci-dessous :
+    // if(cat === 'pnj' && window.innerWidth <= 768) img = img.replace('pnj/', 'pnjmobil/');
     
     if(opts.type) { 
         m = L.marker(pos, { icon: L.divIcon({ className: 'invisible-marker', html: '', iconSize: [1, 1] }) }).bindTooltip(name, { permanent: true, direction: 'center', className: opts.type });
@@ -268,12 +271,14 @@ function loadExternalData() {
     initLikeSystem();
 }
 
-// SECURITÉ IMAGES MANQUANTES
+// SECURITÉ IMAGES MANQUANTES : DÉSACTIVÉ POUR DÉBOGAGE
+/*
 document.addEventListener('error', function (e) {
     if (e.target.tagName === 'IMG') {
-        e.target.style.display = 'none'; // Empêche la recherche en boucle de l'image manquante
+        e.target.style.display = 'none'; 
     }
 }, true);
+*/
 
 function initMenu() {
     var menuCtrl = L.control({position: 'topleft'});
