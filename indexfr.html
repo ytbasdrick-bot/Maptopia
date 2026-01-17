@@ -116,7 +116,7 @@
 
     <div id="social-container">
         <div id="contact-trigger" onclick="toggleChat()">💬</div>
-        <a href="https://discord.gg/9F9swjkmTm" target="_blank"><img src="Discord-Logo-PNG-Pic.png" id="discord-img" class="social-btn-img"></a>
+        <a href="https://discord.gg/M4BkXRhhUw" target="_blank"><img src="Discord-Logo-PNG-Pic.png" id="discord-img" class="social-btn-img"></a>
     </div>
 
     <div id="simple-chat-box">
@@ -184,14 +184,14 @@
             }
         });
 
-        // Sécurité anti-chargement infini : cache les images qui ne chargent pas
+        // SECURITÉ IMAGES MANQUANTES : DÉSACTIVÉ POUR DÉBOGAGE
+        /*
         document.addEventListener('error', function (e) {
             if (e.target.tagName === 'IMG') {
                 e.target.style.display = 'none';
             }
         }, true);
+        */
     </script>
 </body>
 </html>
-
-
